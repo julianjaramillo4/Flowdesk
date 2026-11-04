@@ -23,13 +23,7 @@ public class CashMovement {
 
     public CashMovement() {}
 
-    public CashMovement(
-            String movementId,
-            MovementType type,
-            double amount,
-            Date date,
-            String reason,
-            PaymentMethod paymentMethod) {
+    public CashMovement(String movementId, MovementType type, double amount, Date date, String reason, PaymentMethod paymentMethod) {
         this.movementId = movementId;
         this.type = type;
         this.amount = amount;
@@ -58,10 +52,7 @@ public class CashMovement {
                 throw new ValidationException("Ya existe un movimiento con ese ID.");
             }
         }
-        double accumulatedAmount =
-                type == MovementType.INCOME
-                        ? cashRegister.calculateIncome() + amount
-                        : cashRegister.calculateExpenses() + amount;
+        double accumulatedAmount = type == MovementType.INCOME ? cashRegister.calculateIncome() + amount : cashRegister.calculateExpenses() + amount;
         Validation.requireNonNegativeAmount(accumulatedAmount, "monto acumulado de caja");
     }
 
@@ -74,9 +65,7 @@ public class CashMovement {
         Validation.requireValue(paymentMethod, "metodo de pago");
     }
 
-    public static List<CashMovement> getAll() {
-        return movements;
-    }
+    public static List<CashMovement> getAll() { return movements; }
 
     public static void setAll(List<CashMovement> newItems) {
         movements = newItems == null ? new ArrayList<>() : newItems;
@@ -86,21 +75,65 @@ public class CashMovement {
         System.out.println("\n--- REGISTRAR MOVIMIENTO DE CAJA ---");
 
         String id = ConsoleInput.readRequiredText(scanner, "ID del Movimiento: ");
-
         int typeOption = ConsoleInput.readOption(scanner, "Tipo (1. INGRESO / 2. EGRESO): ", 1, 2);
         MovementType type = (typeOption == 1) ? MovementType.INCOME : MovementType.EXPENSE;
-
         double amount = ConsoleInput.readPositiveAmount(scanner, "Monto: $");
-        String reason = ConsoleInput.readRequiredText(scanner, "Razon/Descripcion: ");
+        
+        System.out.println("\nSeleccione la categoria del movimiento:");
+        System.out.println("1. Producto");
+        System.out.println("2. Servicio");
+        System.out.println("3. Otro");
+        int catOption = ConsoleInput.readOption(scanner, "Opcion: ", 1, 3);
+        
+        String reason = "Otro";
+        
+        if (catOption == 1) {
+            if (Product.getAll().isEmpty()) {
+                System.out.println("No hay productos registrados. Se guardara como 'Otro'.");
+            } else {
+                Product.listFromConsole();
+                String prodId = ConsoleInput.readRequiredText(scanner, "Ingrese ID del Producto: ");
+                Product selectedProd = null;
+                for (Product p : Product.getAll()) {
+                    if (Validation.sameIdentifier(p.getId(), prodId)) {
+                        selectedProd = p;
+                        break;
+                    }
+                }
+                if (selectedProd != null) {
+                    reason = "Producto - " + selectedProd.getName();
+                } else {
+                    System.out.println("Producto no encontrado. Se guardara como 'Otro'.");
+                }
+            }
+        } else if (catOption == 2) {
+            if (Service.getAll().isEmpty()) {
+                System.out.println("No hay servicios registrados. Se guardara como 'Otro'.");
+            } else {
+                Service.listFromConsole();
+                String servId = ConsoleInput.readRequiredText(scanner, "Ingrese ID del Servicio: ");
+                Service selectedServ = null;
+                for (Service s : Service.getAll()) {
+                    if (Validation.sameIdentifier(s.getId(), servId)) {
+                        selectedServ = s;
+                        break;
+                    }
+                }
+                if (selectedServ != null) {
+                    reason = "Servicio - " + selectedServ.getName();
+                } else {
+                    System.out.println("Servicio no encontrado. Se guardara como 'Otro'.");
+                }
+            }
+        } else {
+            String details = ConsoleInput.readRequiredText(scanner, "Razon/Descripcion especifica: ");
+            reason = "Otro - " + details;
+        }
 
-        int methodOption =
-                ConsoleInput.readOption(
-                        scanner, "Metodo de pago (1. EFECTIVO / 2. TRANSFERENCIA): ", 1, 2);
+        int methodOption = ConsoleInput.readOption(scanner, "Metodo de pago (1. EFECTIVO / 2. TRANSFERENCIA): ", 1, 2);
         PaymentMethod method = (methodOption == 1) ? PaymentMethod.CASH : PaymentMethod.TRANSFER;
 
-        Date currentDate = Date.now();
-
-        CashMovement newMovement = new CashMovement(id, type, amount, currentDate, reason, method);
+        CashMovement newMovement = new CashMovement(id, type, amount, Date.now(), reason, method);
         newMovement.registerMovement(cashRegister);
 
         System.out.println("¡Movimiento registrado exitosamente!");
@@ -113,47 +146,15 @@ public class CashMovement {
         } else {
             for (CashMovement m : movements) {
                 String sign = (m.type == MovementType.INCOME) ? "+" : "-";
-                System.out.println(
-                        "- ["
-                                + m.movementId
-                                + "] "
-                                + m.date.toString()
-                                + " | "
-                                + m.type
-                                + " | "
-                                + sign
-                                + "$"
-                                + m.amount
-                                + " | "
-                                + m.reason
-                                + " ("
-                                + m.paymentMethod
-                                + ")");
+                System.out.println("- [" + m.movementId + "] " + m.date.toString() + " | " + m.type + " | " + sign + "$" + m.amount + " | " + m.reason + " (" + m.paymentMethod + ")");
             }
         }
     }
 
-    public String getMovementId() {
-        return movementId;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public MovementType getType() {
-        return type;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
-    }
+    public String getMovementId() { return movementId; }
+    public double getAmount() { return amount; }
+    public MovementType getType() { return type; }
+    public Date getDate() { return date; }
+    public String getReason() { return reason; }
+    public PaymentMethod getPaymentMethod() { return paymentMethod; }
 }

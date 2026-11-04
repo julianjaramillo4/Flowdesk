@@ -60,22 +60,18 @@ public class WorkOrder {
         Validation.requireText(orderId, "identificador de la orden");
         Validation.requireValue(date, "fecha");
         Validation.requireValue(status, "estado");
-        if (details == null || details.isEmpty()) {
-            throw new ValidationException("La orden debe tener al menos un detalle.");
-        }
+        if (details == null || details.isEmpty()) throw new ValidationException("La orden debe tener al menos un detalle.");
+        
         for (WorkOrder existing : orders) {
-            if (Validation.sameIdentifier(existing.orderId, orderId)) {
-                throw new ValidationException("Ya existe una orden con ese ID.");
-            }
+            if (Validation.sameIdentifier(existing.orderId, orderId)) throw new ValidationException("Ya existe una orden con ese ID.");
         }
+        
         ArrayList<String> detailIds = new ArrayList<>();
         for (OrderDetail detail : details) {
             Validation.requireValue(detail, "detalle");
             detail.validate();
             for (String existingId : detailIds) {
-                if (Validation.sameIdentifier(existingId, detail.getDetailId())) {
-                    throw new ValidationException("La orden contiene detalles con el mismo ID.");
-                }
+                if (Validation.sameIdentifier(existingId, detail.getDetailId())) throw new ValidationException("La orden contiene detalles con el mismo ID.");
             }
             detailIds.add(detail.getDetailId());
         }
@@ -95,9 +91,7 @@ public class WorkOrder {
 
     public double calculateTotalPaid() {
         double totalPaid = 0;
-        for (Payment payment : payments) {
-            totalPaid += payment.getAmount();
-        }
+        for (Payment payment : payments) totalPaid += payment.getAmount();
         return totalPaid;
     }
 
@@ -133,23 +127,17 @@ public class WorkOrder {
     public int getCompletedDetailCount() {
         if (details == null) return 0;
         int count = 0;
-        for (OrderDetail detail : details) {
-            if (detail != null && detail.isCompleted()) count++;
-        }
+        for (OrderDetail detail : details) if (detail != null && detail.isCompleted()) count++;
         return count;
     }
 
-    public int getTotalDetailCount() {
-        return details == null ? 0 : details.size();
-    }
+    public int getTotalDetailCount() { return details == null ? 0 : details.size(); }
 
     public String getProgressBar() {
         int percent = calculateProgressPercentage();
         int filled = percent / 10;
         StringBuilder bar = new StringBuilder("[");
-        for (int i = 0; i < 10; i++) {
-            bar.append(i < filled ? '#' : '-');
-        }
+        for (int i = 0; i < 10; i++) bar.append(i < filled ? '#' : '-');
         bar.append("] ").append(percent).append("% (").append(getCompletedDetailCount()).append("/").append(getTotalDetailCount()).append(")");
         return bar.toString();
     }
@@ -180,7 +168,6 @@ public class WorkOrder {
             int option = ConsoleInput.readOption(scanner, "Opcion: ", 0, 2);
 
             if (option == 0) break;
-
             OrderDetail detail = option == 1 ? readProductDetail(scanner, "D" + detailCounter) : readServiceDetail(scanner, "D" + detailCounter);
 
             if (detail != null) {
@@ -199,10 +186,7 @@ public class WorkOrder {
     }
 
     private static OrderDetail readProductDetail(Scanner scanner, String detailId) {
-        if (Product.getAll().isEmpty()) {
-            System.out.println("No hay productos.");
-            return null;
-        }
+        if (Product.getAll().isEmpty()) { System.out.println("No hay productos."); return null; }
         Product.listFromConsole();
         String productId = ConsoleInput.readRequiredText(scanner, "Ingrese ID del Producto: ");
         for (Product product : Product.getAll()) {
@@ -217,10 +201,7 @@ public class WorkOrder {
     }
 
     private static OrderDetail readServiceDetail(Scanner scanner, String detailId) {
-        if (Service.getAll().isEmpty()) {
-            System.out.println("No hay servicios.");
-            return null;
-        }
+        if (Service.getAll().isEmpty()) { System.out.println("No hay servicios."); return null; }
         Service.listFromConsole();
         String serviceId = ConsoleInput.readRequiredText(scanner, "Ingrese ID del Servicio: ");
         for (Service service : Service.getAll()) {
@@ -242,7 +223,7 @@ public class WorkOrder {
         } else {
             for (WorkOrder wo : orders) {
                 String customerName = wo.customer == null ? "Sin cliente" : wo.customer.getName();
-                System.out.println("- [" + wo.orderId + "] Fecha: " + wo.date + " | Cliente: " + customerName + " | Estado: " + wo.status + " | Progreso: " + wo.getProgressBar() + " | Total: $" + wo.total + " | Saldo: $" + wo.balance);
+                System.out.println("- [" + wo.orderId + "] Cliente: " + customerName + " | Estado: " + wo.status + " | Progreso: " + wo.getProgressBar());
             }
         }
     }
@@ -254,7 +235,11 @@ public class WorkOrder {
             return;
         }
 
-        String searchId = ConsoleInput.readRequiredText(scanner, "Ingrese el numero de orden (ej. WO-001): ");
+        // NUEVO: Mostrar órdenes actuales antes de pedir el ID
+        listFromConsole();
+        System.out.println("--------------------------------------------------");
+
+        String searchId = ConsoleInput.readRequiredText(scanner, "Ingrese el ID de la orden a modificar (ej. WO-001): ");
         WorkOrder order = null;
         for (WorkOrder wo : orders) {
             if (Validation.sameIdentifier(wo.getOrderId(), searchId)) {
@@ -285,10 +270,7 @@ public class WorkOrder {
     }
 
     private static void toggleDetails(Scanner scanner, WorkOrder order) {
-        if (order.details == null || order.details.isEmpty()) {
-            System.out.println("La orden no tiene detalles.");
-            return;
-        }
+        if (order.details == null || order.details.isEmpty()) { System.out.println("La orden no tiene detalles."); return; }
         System.out.println("\n--- DETALLES ---");
         for (int i = 0; i < order.details.size(); i++) {
             OrderDetail d = order.details.get(i);
