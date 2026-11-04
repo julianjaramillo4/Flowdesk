@@ -1,4 +1,4 @@
- npackage com.mycompany.flowdesk;
+ package com.mycompany.flowdesk;
 
 import data.DataManager;
 import enums.Role;

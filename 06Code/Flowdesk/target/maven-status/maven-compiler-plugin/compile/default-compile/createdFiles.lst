@@ -1,5 +1,6 @@
 models\CashRegister.class
 exceptions\InvalidPaymentException.class
+reports\Dashboard$1.class
 data\DataManager$3.class
 enums\MovementType.class
 models\User.class
