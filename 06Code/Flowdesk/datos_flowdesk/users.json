@@ -18,45 +18,9 @@
     "role": "CASHIER"
   },
   {
-    "userId": "U_EMPLOYEE_1793247778831",
-    "username": "U_EMPLOYEE",
-    "password": "joquin loza",
-    "role": "EMPLOYEE"
-  },
-  {
-    "userId": "U_EMPLOYEE_1793735007323",
-    "username": "fdsa",
-    "password": "dsd",
-    "role": "EMPLOYEE"
-  },
-  {
-    "userId": "U_MANAGER_1793736033963",
-    "username": "1",
-    "password": "1",
-    "role": "MANAGER"
-  },
-  {
-    "userId": "U_EMPLOYEE_1793736256991",
-    "username": "dsadsadsad",
-    "password": "dsadsad",
-    "role": "EMPLOYEE"
-  },
-  {
-    "userId": "U_CASHIER_1793736452342",
-    "username": "sdsadsadsa",
-    "password": "fghfhg",
-    "role": "CASHIER"
-  },
-  {
-    "userId": "U_EMPLOYEE_1793752300684",
-    "username": "45",
-    "password": "45",
-    "role": "EMPLOYEE"
-  },
-  {
-    "userId": "U_EMPLOYEE_1793752693117",
-    "username": "564",
-    "password": "156",
+    "userId": "U_EMPLOYEE_1793755407894",
+    "username": "dsadsa",
+    "password": "dsadas",
     "role": "EMPLOYEE"
   }
 ]

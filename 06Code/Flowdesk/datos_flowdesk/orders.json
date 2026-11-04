@@ -23,7 +23,7 @@
         "quantity": 100,
         "description": "100 tarjetas a color",
         "unitPrice": 0.2,
-        "completed": false
+        "completed": true
       },
       {
         "detailId": "DEMO-D002",
@@ -113,7 +113,7 @@
         "quantity": 3,
         "description": "Tres documentos anillados",
         "unitPrice": 3.0,
-        "completed": false
+        "completed": true
       }
     ],
     "payments": []

@@ -119,8 +119,12 @@ public class WorkOrder {
         if (details == null || details.isEmpty()) return 0;
         int completedCount = 0;
         for (OrderDetail detail : details) {
-            if (detail != null && detail.isCompleted()) completedCount++;
+            if (detail != null && detail.isCompleted()) {
+                completedCount++;
+            }
         }
+        // (Opcional) Descomenta la siguiente línea para depurar en consola y ver por qué falla
+        // System.out.println("[DEBUG] Calculando progreso: " + completedCount + " de " + details.size());
         return (int) Math.round((completedCount * 100.0) / details.size());
     }
 
@@ -235,7 +239,6 @@ public class WorkOrder {
             return;
         }
 
-        // NUEVO: Mostrar órdenes actuales antes de pedir el ID
         listFromConsole();
         System.out.println("--------------------------------------------------");
 
@@ -281,7 +284,10 @@ public class WorkOrder {
         if (pick == 0) return;
 
         OrderDetail selected = order.details.get(pick - 1);
+        
+        // Aquí es donde se alterna el estado
         selected.setCompleted(!selected.isCompleted());
+        
         System.out.println("Detalle '" + selected.getItemName() + "' marcado como " + (selected.isCompleted() ? "COMPLETADO" : "PENDIENTE") + ".");
         System.out.println("Progreso actual: " + order.getProgressBar());
 

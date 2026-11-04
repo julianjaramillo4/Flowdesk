@@ -77,66 +77,95 @@ public class CashMovement {
         String id = ConsoleInput.readRequiredText(scanner, "ID del Movimiento: ");
         int typeOption = ConsoleInput.readOption(scanner, "Tipo (1. INGRESO / 2. EGRESO): ", 1, 2);
         MovementType type = (typeOption == 1) ? MovementType.INCOME : MovementType.EXPENSE;
-        double amount = ConsoleInput.readPositiveAmount(scanner, "Monto: $");
         
-        System.out.println("\nSeleccione la categoria del movimiento:");
-        System.out.println("1. Producto");
-        System.out.println("2. Servicio");
-        System.out.println("3. Otro");
-        int catOption = ConsoleInput.readOption(scanner, "Opcion: ", 1, 3);
-        
-        String reason = "Otro";
-        
-        if (catOption == 1) {
-            if (Product.getAll().isEmpty()) {
-                System.out.println("No hay productos registrados. Se guardara como 'Otro'.");
-            } else {
-                Product.listFromConsole();
-                String prodId = ConsoleInput.readRequiredText(scanner, "Ingrese ID del Producto: ");
-                Product selectedProd = null;
-                for (Product p : Product.getAll()) {
-                    if (Validation.sameIdentifier(p.getId(), prodId)) {
-                        selectedProd = p;
+        double finalAmount = 0.0;
+        StringBuilder reasonBuilder = new StringBuilder();
+
+        boolean keepAdding = true;
+        while (keepAdding) {
+            System.out.println("\n--- AGREGAR AL MOVIMIENTO (Total actual: $" + finalAmount + ") ---");
+            System.out.println("1. Agregar Producto");
+            System.out.println("2. Agregar Servicio");
+            System.out.println("3. Agregar Otro (Monto y Descripcion manual)");
+            System.out.println("4. Terminar y guardar movimiento");
+            int opt = ConsoleInput.readOption(scanner, "Opcion: ", 1, 4);
+
+            switch (opt) {
+                case 1 -> {
+                    if (Product.getAll().isEmpty()) {
+                        System.out.println("No hay productos registrados en el sistema.");
                         break;
                     }
-                }
-                if (selectedProd != null) {
-                    reason = "Producto - " + selectedProd.getName();
-                } else {
-                    System.out.println("Producto no encontrado. Se guardara como 'Otro'.");
-                }
-            }
-        } else if (catOption == 2) {
-            if (Service.getAll().isEmpty()) {
-                System.out.println("No hay servicios registrados. Se guardara como 'Otro'.");
-            } else {
-                Service.listFromConsole();
-                String servId = ConsoleInput.readRequiredText(scanner, "Ingrese ID del Servicio: ");
-                Service selectedServ = null;
-                for (Service s : Service.getAll()) {
-                    if (Validation.sameIdentifier(s.getId(), servId)) {
-                        selectedServ = s;
-                        break;
+                    Product.listFromConsole();
+                    String prodId = ConsoleInput.readRequiredText(scanner, "Ingrese ID del Producto: ");
+                    Product p = null;
+                    for (Product prod : Product.getAll()) {
+                        if (Validation.sameIdentifier(prod.getId(), prodId)) {
+                            p = prod;
+                            break;
+                        }
+                    }
+                    if (p != null) {
+                        int qty = ConsoleInput.readPositiveInt(scanner, "Cantidad: ");
+                        finalAmount += (p.getPrice() * qty);
+                        reasonBuilder.append("\n  - ").append(qty).append("x ").append(p.getName()).append(" ($").append(p.getPrice()).append(" c/u)");
+                        System.out.println("Producto agregado.");
+                    } else {
+                        System.out.println("Producto no encontrado.");
                     }
                 }
-                if (selectedServ != null) {
-                    reason = "Servicio - " + selectedServ.getName();
-                } else {
-                    System.out.println("Servicio no encontrado. Se guardara como 'Otro'.");
+                case 2 -> {
+                    if (Service.getAll().isEmpty()) {
+                        System.out.println("No hay servicios registrados en el sistema.");
+                        break;
+                    }
+                    Service.listFromConsole();
+                    String servId = ConsoleInput.readRequiredText(scanner, "Ingrese ID del Servicio: ");
+                    Service s = null;
+                    for (Service serv : Service.getAll()) {
+                        if (Validation.sameIdentifier(serv.getId(), servId)) {
+                            s = serv;
+                            break;
+                        }
+                    }
+                    if (s != null) {
+                        int qty = ConsoleInput.readPositiveInt(scanner, "Cantidad (Horas/Veces): ");
+                        double price = ConsoleInput.readAmount(scanner, "Precio Unitario a cobrar ($" + s.getPrice() + " sugerido): $");
+                        finalAmount += (price * qty);
+                        reasonBuilder.append("\n  - ").append(qty).append("x ").append(s.getName()).append(" ($").append(price).append(" c/u)");
+                        System.out.println("Servicio agregado.");
+                    } else {
+                        System.out.println("Servicio no encontrado.");
+                    }
+                }
+                case 3 -> {
+                    double monto = ConsoleInput.readPositiveAmount(scanner, "Monto manual: $");
+                    String details = ConsoleInput.readRequiredText(scanner, "Descripcion del movimiento: ");
+                    finalAmount += monto;
+                    reasonBuilder.append("\n  - Otro: ").append(details).append(" ($").append(monto).append(")");
+                    System.out.println("Monto manual agregado.");
+                }
+                case 4 -> {
+                    if (finalAmount <= 0) {
+                        System.out.println("El monto total no puede ser 0. Agregue al menos un item o cancele.");
+                        break;
+                    }
+                    keepAdding = false;
                 }
             }
-        } else {
-            String details = ConsoleInput.readRequiredText(scanner, "Razon/Descripcion especifica: ");
-            reason = "Otro - " + details;
         }
 
-        int methodOption = ConsoleInput.readOption(scanner, "Metodo de pago (1. EFECTIVO / 2. TRANSFERENCIA): ", 1, 2);
+        System.out.println("\n--- RESUMEN DEL MOVIMIENTO ---");
+        System.out.println("Total a registrar: $" + finalAmount);
+        System.out.println("Desglose:" + reasonBuilder.toString());
+
+        int methodOption = ConsoleInput.readOption(scanner, "\nMetodo de pago (1. EFECTIVO / 2. TRANSFERENCIA): ", 1, 2);
         PaymentMethod method = (methodOption == 1) ? PaymentMethod.CASH : PaymentMethod.TRANSFER;
 
-        CashMovement newMovement = new CashMovement(id, type, amount, Date.now(), reason, method);
+        CashMovement newMovement = new CashMovement(id, type, finalAmount, Date.now(), reasonBuilder.toString().trim(), method);
         newMovement.registerMovement(cashRegister);
 
-        System.out.println("¡Movimiento registrado exitosamente!");
+        System.out.println("¡Movimiento registrado exitosamente en la caja!");
     }
 
     public static void listFromConsole() {
@@ -146,7 +175,8 @@ public class CashMovement {
         } else {
             for (CashMovement m : movements) {
                 String sign = (m.type == MovementType.INCOME) ? "+" : "-";
-                System.out.println("- [" + m.movementId + "] " + m.date.toString() + " | " + m.type + " | " + sign + "$" + m.amount + " | " + m.reason + " (" + m.paymentMethod + ")");
+                System.out.println("- [" + m.movementId + "] " + m.date.toString() + " | " + m.type + " | " + sign + "$" + m.amount + " (" + m.paymentMethod + ")");
+                System.out.println("  Motivo: " + m.reason.replace("\n", "\n  "));
             }
         }
     }
