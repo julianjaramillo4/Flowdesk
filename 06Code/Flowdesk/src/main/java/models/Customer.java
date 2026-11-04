@@ -19,18 +19,10 @@ public class Customer {
     private String address;
     private String birthDate;
 
-    private static final DateTimeFormatter DATE_FORMAT =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static List<Customer> customers = new ArrayList<>();
 
-    public Customer(
-            String customerId,
-            String name,
-            String phone,
-            String idNumber,
-            String address,
-            String birthDate) {
+    public Customer(String customerId, String name, String phone, String idNumber, String address, String birthDate) {
         this.customerId = customerId;
         this.name = name;
         this.phone = phone;
@@ -59,8 +51,14 @@ public class Customer {
         Validation.requireText(customerId, "identificador del cliente");
         Validation.requireText(name, "nombre del cliente");
         Validation.requireText(phone, "telefono");
-        Validation.requireText(idNumber, "cedula");
+        
+        // Permite cedulas numericas o IDs de prueba (DEMO-)
+        if (!idNumber.matches("\\d+") && !idNumber.startsWith("DEMO-")) {
+            throw new ValidationException("La cedula debe contener solo numeros.");
+        }
+        
         Validation.requireText(address, "direccion");
+        
         if (birthDate != null && !birthDate.isBlank()) {
             parseBirthDate();
         }
@@ -74,18 +72,14 @@ public class Customer {
             }
             return date;
         } catch (DateTimeParseException exception) {
-            throw new ValidationException(
-                    "La fecha de nacimiento debe tener el formato yyyy-MM-dd.");
+            throw new ValidationException("La fecha de nacimiento debe tener el formato yyyy-MM-dd.");
         }
     }
 
     public int getAge() {
-        if (birthDate == null || birthDate.isBlank()) {
-            return -1;
-        }
+        if (birthDate == null || birthDate.isBlank()) return -1;
         try {
-            LocalDate birth = parseBirthDate();
-            return Period.between(birth, LocalDate.now()).getYears();
+            return Period.between(parseBirthDate(), LocalDate.now()).getYears();
         } catch (ValidationException exception) {
             return -1;
         }
@@ -97,8 +91,7 @@ public class Customer {
 
     public static Customer search(String searchTerm) {
         for (Customer c : customers) {
-            if (Validation.sameIdentifier(c.getCustomerId(), searchTerm)
-                    || Validation.sameIdentifier(c.getIdNumber(), searchTerm)) {
+            if (Validation.sameIdentifier(c.getCustomerId(), searchTerm) || Validation.sameIdentifier(c.getIdNumber(), searchTerm)) {
                 return c;
             }
         }
@@ -140,24 +133,21 @@ public class Customer {
 
         String name = ConsoleInput.readRequiredText(scanner, "Nombre completo: ");
         String phone = ConsoleInput.readRequiredText(scanner, "Telefono: ");
-        String nationalId = ConsoleInput.readRequiredText(scanner, "Cedula/DNI: ");
+        
+        // Validacion instantanea
+        String nationalId = ConsoleInput.readNumericText(scanner, "Cedula/DNI (solo numeros): ");
+        
         String address = ConsoleInput.readRequiredText(scanner, "Direccion: ");
         String birthDate = readBirthDate(scanner);
 
-        Customer newCustomer =
-                new Customer(id, name, phone, nationalId, address, birthDate);
+        Customer newCustomer = new Customer(id, name, phone, nationalId, address, birthDate);
         newCustomer.register();
-        System.out.println(
-                "¡Cliente registrado con exito! Edad calculada: "
-                        + newCustomer.getAge()
-                        + " años.");
+        System.out.println("¡Cliente registrado con exito! Edad calculada: " + newCustomer.getAge() + " años.");
     }
 
     private static String readBirthDate(Scanner scanner) {
         while (true) {
-            String raw =
-                    ConsoleInput.readRequiredText(
-                            scanner, "Fecha de nacimiento (yyyy-MM-dd): ");
+            String raw = ConsoleInput.readRequiredText(scanner, "Fecha de nacimiento (yyyy-MM-dd): ");
             try {
                 LocalDate date = LocalDate.parse(raw.trim(), DATE_FORMAT);
                 if (date.isAfter(LocalDate.now())) {
@@ -166,18 +156,14 @@ public class Customer {
                 }
                 return date.format(DATE_FORMAT);
             } catch (DateTimeParseException exception) {
-                System.out.println(
-                        "Formato invalido. Use yyyy-MM-dd (ejemplo: 1990-05-23).");
+                System.out.println("Formato invalido. Use yyyy-MM-dd (ejemplo: 1990-05-23).");
             }
         }
     }
 
     private static void searchFromConsole(Scanner scanner) {
         System.out.println("\n--- BUSCAR CLIENTE ---");
-        String searchTerm =
-                ConsoleInput.readRequiredText(
-                        scanner, "Ingrese el ID o la Cedula del cliente: ");
-
+        String searchTerm = ConsoleInput.readRequiredText(scanner, "Ingrese el ID o la Cedula del cliente: ");
         Customer match = search(searchTerm);
 
         if (match != null) {
@@ -200,15 +186,7 @@ public class Customer {
             System.out.println("No hay clientes registrados aun.");
         } else {
             for (Customer c : customers) {
-                System.out.println(
-                        "- ["
-                                + c.getCustomerId()
-                                + "] "
-                                + c.getName()
-                                + " | Tel: "
-                                + c.getPhone()
-                                + " | Edad: "
-                                + formatAge(c.getAge()));
+                System.out.println("- [" + c.getCustomerId() + "] " + c.getName() + " | Tel: " + c.getPhone() + " | Edad: " + formatAge(c.getAge()));
             }
         }
     }
@@ -221,31 +199,11 @@ public class Customer {
         return (birthDate == null || birthDate.isBlank()) ? "N/D" : birthDate;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getIdNumber() {
-        return idNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
+    public String getCustomerId() { return customerId; }
+    public String getName() { return name; }
+    public String getPhone() { return phone; }
+    public String getIdNumber() { return idNumber; }
+    public String getAddress() { return address; }
+    public String getBirthDate() { return birthDate; }
+    public void setBirthDate(String birthDate) { this.birthDate = birthDate; }
 }

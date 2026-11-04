@@ -11,6 +11,13 @@ public final class Validation {
         }
     }
 
+    public static void requireNumericText(String value, String fieldName) {
+        requireText(value, fieldName);
+        if (!value.matches("\\d+")) {
+            throw new ValidationException("El campo " + fieldName + " debe contener solo numeros.");
+        }
+    }
+
     public static void requireValue(Object value, String fieldName) {
         if (value == null) {
             throw new ValidationException("El campo " + fieldName + " es obligatorio.");

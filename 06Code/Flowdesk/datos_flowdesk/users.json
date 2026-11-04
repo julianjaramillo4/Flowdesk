@@ -52,5 +52,11 @@
     "username": "45",
     "password": "45",
     "role": "EMPLOYEE"
+  },
+  {
+    "userId": "U_EMPLOYEE_1793752693117",
+    "username": "564",
+    "password": "156",
+    "role": "EMPLOYEE"
   }
 ]

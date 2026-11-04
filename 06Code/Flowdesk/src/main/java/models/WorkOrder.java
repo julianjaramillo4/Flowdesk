@@ -40,9 +40,7 @@ public class WorkOrder {
         this.balance = 0;
     }
 
-    public static List<WorkOrder> getAll() {
-        return orders;
-    }
+    public static List<WorkOrder> getAll() { return orders; }
 
     public static void setAll(List<WorkOrder> newItems) {
         orders = newItems == null ? new ArrayList<>() : newItems;
@@ -53,8 +51,7 @@ public class WorkOrder {
                     int num = Integer.parseInt(wo.orderId.substring(3));
                     if (num > maxId) maxId = num;
                 }
-            } catch (NumberFormatException ignored) {
-            }
+            } catch (NumberFormatException ignored) {}
         }
         orderCounter = maxId + 1;
     }
@@ -87,14 +84,8 @@ public class WorkOrder {
     }
 
     public void addPayment(Payment payment) {
-        if (payment == null) {
-            throw new InvalidPaymentException("El pago no puede estar vacio.");
-        }
-
-        if (payment.getWorkOrder() == null) {
-            payment.setWorkOrder(this);
-        }
-
+        if (payment == null) throw new InvalidPaymentException("El pago no puede estar vacio.");
+        if (payment.getWorkOrder() == null) payment.setWorkOrder(this);
         calculateTotals();
         payment.validateFor(this);
         payments.add(payment);
@@ -131,14 +122,10 @@ public class WorkOrder {
     }
 
     public int calculateProgressPercentage() {
-        if (details == null || details.isEmpty()) {
-            return 0;
-        }
+        if (details == null || details.isEmpty()) return 0;
         int completedCount = 0;
         for (OrderDetail detail : details) {
-            if (detail != null && detail.isCompleted()) {
-                completedCount++;
-            }
+            if (detail != null && detail.isCompleted()) completedCount++;
         }
         return (int) Math.round((completedCount * 100.0) / details.size());
     }
@@ -163,13 +150,7 @@ public class WorkOrder {
         for (int i = 0; i < 10; i++) {
             bar.append(i < filled ? '#' : '-');
         }
-        bar.append("] ")
-                .append(percent)
-                .append("% (")
-                .append(getCompletedDetailCount())
-                .append("/")
-                .append(getTotalDetailCount())
-                .append(")");
+        bar.append("] ").append(percent).append("% (").append(getCompletedDetailCount()).append("/").append(getTotalDetailCount()).append(")");
         return bar.toString();
     }
 
@@ -178,8 +159,7 @@ public class WorkOrder {
         String newId = String.format("WO-%03d", orderCounter++);
         System.out.println("Numero de Orden generado: " + newId);
 
-        String searchTerm =
-                ConsoleInput.readRequiredText(scanner, "Ingrese ID o Cedula del Cliente: ");
+        String searchTerm = ConsoleInput.readRequiredText(scanner, "Ingrese ID o Cedula del Cliente: ");
         Customer customer = Customer.search(searchTerm);
 
         if (customer == null) {
@@ -188,13 +168,11 @@ public class WorkOrder {
         }
 
         System.out.println("Cliente asignado: " + customer.getName());
-
         WorkOrder newOrder = new WorkOrder(newId, Date.now(), OrderStatus.WAITING);
         newOrder.customer = customer;
         newOrder.user = employee;
 
         int detailCounter = 1;
-
         while (true) {
             System.out.println("\n1. Agregar Producto");
             System.out.println("2. Agregar Servicio");
@@ -203,10 +181,7 @@ public class WorkOrder {
 
             if (option == 0) break;
 
-            OrderDetail detail =
-                    option == 1
-                            ? readProductDetail(scanner, "D" + detailCounter)
-                            : readServiceDetail(scanner, "D" + detailCounter);
+            OrderDetail detail = option == 1 ? readProductDetail(scanner, "D" + detailCounter) : readServiceDetail(scanner, "D" + detailCounter);
 
             if (detail != null) {
                 newOrder.details.add(detail);
@@ -219,7 +194,6 @@ public class WorkOrder {
 
         newOrder.calculateTotals();
         newOrder.create();
-
         System.out.println("\n¡Orden " + newOrder.orderId + " creada exitosamente!");
         System.out.println("Total a pagar: $" + newOrder.total);
     }
@@ -234,13 +208,7 @@ public class WorkOrder {
         for (Product product : Product.getAll()) {
             if (Validation.sameIdentifier(product.getId(), productId)) {
                 int quantity = ConsoleInput.readPositiveInt(scanner, "Cantidad: ");
-                OrderDetail detail =
-                        new OrderDetail(
-                                detailId,
-                                product.getName(),
-                                quantity,
-                                product.getDescription(),
-                                product.getPrice());
+                OrderDetail detail = new OrderDetail(detailId, product.getName(), quantity, product.getDescription(), product.getPrice());
                 detail.setProduct(product);
                 return detail;
             }
@@ -259,13 +227,7 @@ public class WorkOrder {
             if (Validation.sameIdentifier(service.getId(), serviceId)) {
                 int quantity = ConsoleInput.readPositiveInt(scanner, "Cantidad (Horas/Veces): ");
                 double price = ConsoleInput.readAmount(scanner, "Precio Unitario a cobrar: $");
-                OrderDetail detail =
-                        new OrderDetail(
-                                detailId,
-                                service.getName(),
-                                quantity,
-                                service.getDescription(),
-                                price);
+                OrderDetail detail = new OrderDetail(detailId, service.getName(), quantity, service.getDescription(), price);
                 detail.setService(service);
                 return detail;
             }
@@ -280,21 +242,7 @@ public class WorkOrder {
         } else {
             for (WorkOrder wo : orders) {
                 String customerName = wo.customer == null ? "Sin cliente" : wo.customer.getName();
-                System.out.println(
-                        "- ["
-                                + wo.orderId
-                                + "] Fecha: "
-                                + wo.date
-                                + " | Cliente: "
-                                + customerName
-                                + " | Estado: "
-                                + wo.status
-                                + " | Progreso: "
-                                + wo.getProgressBar()
-                                + " | Total: $"
-                                + wo.total
-                                + " | Saldo: $"
-                                + wo.balance);
+                System.out.println("- [" + wo.orderId + "] Fecha: " + wo.date + " | Cliente: " + customerName + " | Estado: " + wo.status + " | Progreso: " + wo.getProgressBar() + " | Total: $" + wo.total + " | Saldo: $" + wo.balance);
             }
         }
     }
@@ -306,9 +254,7 @@ public class WorkOrder {
             return;
         }
 
-        String searchId =
-                ConsoleInput.readRequiredText(
-                        scanner, "Ingrese el numero de orden (ej. WO-001): ");
+        String searchId = ConsoleInput.readRequiredText(scanner, "Ingrese el numero de orden (ej. WO-001): ");
         WorkOrder order = null;
         for (WorkOrder wo : orders) {
             if (Validation.sameIdentifier(wo.getOrderId(), searchId)) {
@@ -324,14 +270,7 @@ public class WorkOrder {
 
         boolean back = false;
         while (!back) {
-            System.out.println(
-                    "\nOrden: "
-                            + order.getOrderId()
-                            + " | Estado: "
-                            + order.getStatus()
-                            + " | Progreso: "
-                            + order.getProgressBar());
-
+            System.out.println("\nOrden: " + order.getOrderId() + " | Estado: " + order.getStatus() + " | Progreso: " + order.getProgressBar());
             System.out.println("\n1. Ver y marcar detalles");
             System.out.println("2. Cambiar estado");
             System.out.println("0. Volver");
@@ -353,29 +292,15 @@ public class WorkOrder {
         System.out.println("\n--- DETALLES ---");
         for (int i = 0; i < order.details.size(); i++) {
             OrderDetail d = order.details.get(i);
-            System.out.println(
-                    (i + 1)
-                            + ". "
-                            + (d.isCompleted() ? "[X] " : "[ ] ")
-                            + d.getItemName()
-                            + " (x"
-                            + d.getQuantity()
-                            + ")");
+            System.out.println((i + 1) + ". " + (d.isCompleted() ? "[X] " : "[ ] ") + d.getItemName() + " (x" + d.getQuantity() + ")");
         }
         System.out.println("0. Volver");
-        int pick =
-                ConsoleInput.readOption(
-                        scanner, "Seleccione detalle a alternar: ", 0, order.details.size());
+        int pick = ConsoleInput.readOption(scanner, "Seleccione detalle a alternar: ", 0, order.details.size());
         if (pick == 0) return;
 
         OrderDetail selected = order.details.get(pick - 1);
         selected.setCompleted(!selected.isCompleted());
-        System.out.println(
-                "Detalle '"
-                        + selected.getItemName()
-                        + "' marcado como "
-                        + (selected.isCompleted() ? "COMPLETADO" : "PENDIENTE")
-                        + ".");
+        System.out.println("Detalle '" + selected.getItemName() + "' marcado como " + (selected.isCompleted() ? "COMPLETADO" : "PENDIENTE") + ".");
         System.out.println("Progreso actual: " + order.getProgressBar());
 
         syncStatusWithProgress(order);
@@ -385,13 +310,11 @@ public class WorkOrder {
         int p = order.calculateProgressPercentage();
         OrderStatus current = order.getStatus();
         if (p == 0 && current == OrderStatus.WAITING) return;
+        
         if (p == 100 && current != OrderStatus.DELIVERED) {
             order.changeStatus(OrderStatus.COMPLETED);
             System.out.println("-> Estado ajustado automaticamente a: " + OrderStatus.COMPLETED);
-        } else if (p > 0
-                && p < 100
-                && current != OrderStatus.DELIVERED
-                && current != OrderStatus.IN_PROGRESS) {
+        } else if (p > 0 && p < 100 && current != OrderStatus.DELIVERED && current != OrderStatus.IN_PROGRESS) {
             order.changeStatus(OrderStatus.IN_PROGRESS);
             System.out.println("-> Estado ajustado automaticamente a: " + OrderStatus.IN_PROGRESS);
         }
@@ -408,15 +331,14 @@ public class WorkOrder {
         int option = ConsoleInput.readOption(scanner, "Opcion: ", 0, 5);
         if (option == 0) return;
 
-        OrderStatus newStatus =
-                switch (option) {
-                    case 1 -> OrderStatus.WAITING;
-                    case 2 -> OrderStatus.APPROVED;
-                    case 3 -> OrderStatus.IN_PROGRESS;
-                    case 4 -> OrderStatus.COMPLETED;
-                    case 5 -> OrderStatus.DELIVERED;
-                    default -> null;
-                };
+        OrderStatus newStatus = switch (option) {
+            case 1 -> OrderStatus.WAITING;
+            case 2 -> OrderStatus.APPROVED;
+            case 3 -> OrderStatus.IN_PROGRESS;
+            case 4 -> OrderStatus.COMPLETED;
+            case 5 -> OrderStatus.DELIVERED;
+            default -> null;
+        };
         if (newStatus == null) return;
 
         order.changeStatus(newStatus);
@@ -424,35 +346,12 @@ public class WorkOrder {
         System.out.println("Progreso calculado: " + order.getProgressBar());
     }
 
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public List<OrderDetail> getDetails() {
-        return details;
-    }
-
-    public List<Payment> getPayments() {
-        return payments;
-    }
+    public String getOrderId() { return orderId; }
+    public Date getDate() { return date; }
+    public double getTotal() { return total; }
+    public double getBalance() { return balance; }
+    public OrderStatus getStatus() { return status; }
+    public Customer getCustomer() { return customer; }
+    public List<OrderDetail> getDetails() { return details; }
+    public List<Payment> getPayments() { return payments; }
 }

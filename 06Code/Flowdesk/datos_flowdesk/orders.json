@@ -22,14 +22,16 @@
         "itemName": "Tarjetas de presentacion",
         "quantity": 100,
         "description": "100 tarjetas a color",
-        "unitPrice": 0.2
+        "unitPrice": 0.2,
+        "completed": false
       },
       {
         "detailId": "DEMO-D002",
         "itemName": "Diseno grafico",
         "quantity": 1,
         "description": "Diseno para tarjetas",
-        "unitPrice": 15.0
+        "unitPrice": 15.0,
+        "completed": false
       }
     ],
     "payments": [
@@ -81,7 +83,8 @@
         "itemName": "Volante publicitario",
         "quantity": 200,
         "description": "200 volantes para cafeteria",
-        "unitPrice": 0.15
+        "unitPrice": 0.15,
+        "completed": false
       }
     ],
     "payments": []
@@ -109,7 +112,8 @@
         "itemName": "Anillado",
         "quantity": 3,
         "description": "Tres documentos anillados",
-        "unitPrice": 3.0
+        "unitPrice": 3.0,
+        "completed": false
       }
     ],
     "payments": []
