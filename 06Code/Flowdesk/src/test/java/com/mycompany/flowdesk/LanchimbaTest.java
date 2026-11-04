@@ -16,11 +16,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import utils.Date;
 
-
 public class LanchimbaTest {
 
-    public LanchimbaTest() {
-    }
+    public LanchimbaTest() {}
 
     @BeforeEach
     public void setUp() {
@@ -365,24 +363,13 @@ public class LanchimbaTest {
 
     @Test
     public void testPartialPaymentReducesBalance() {
-        WorkOrder order = new WorkOrder(
-                "WO-108",
-                new Date(25, 10, 2026),
-                OrderStatus.WAITING
-        );
+        WorkOrder order = new WorkOrder("WO-108", new Date(25, 10, 2026), OrderStatus.WAITING);
 
-        order.getDetails().add(
-                new OrderDetail("D1", "Banner", 1, "Vinyl", 50.00)
-        );
+        order.getDetails().add(new OrderDetail("D1", "Banner", 1, "Vinyl", 50.00));
 
         order.calculateTotals();
 
-        Payment payment = new Payment(
-                "PAY-1",
-                20.00,
-                new Date(25, 10, 2026),
-                PaymentMethod.CASH
-        );
+        Payment payment = new Payment("PAY-1", 20.00, new Date(25, 10, 2026), PaymentMethod.CASH);
 
         payment.setWorkOrder(order);
         payment.registerPayment();
@@ -396,24 +383,14 @@ public class LanchimbaTest {
 
     @Test
     public void testFullPaymentClearsBalance() {
-        WorkOrder order = new WorkOrder(
-                "WO-109",
-                new Date(25, 10, 2026),
-                OrderStatus.WAITING
-        );
+        WorkOrder order = new WorkOrder("WO-109", new Date(25, 10, 2026), OrderStatus.WAITING);
 
-        order.getDetails().add(
-                new OrderDetail("D1", "Banner", 1, "Vinyl", 50.00)
-        );
+        order.getDetails().add(new OrderDetail("D1", "Banner", 1, "Vinyl", 50.00));
 
         order.calculateTotals();
 
-        Payment payment = new Payment(
-                "PAY-2",
-                50.00,
-                new Date(25, 10, 2026),
-                PaymentMethod.TRANSFER
-        );
+        Payment payment =
+                new Payment("PAY-2", 50.00, new Date(25, 10, 2026), PaymentMethod.TRANSFER);
 
         payment.setWorkOrder(order);
         payment.registerPayment();

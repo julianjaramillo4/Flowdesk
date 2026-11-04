@@ -53,8 +53,12 @@ class PaymentConsoleTest {
     }
 
     private String enterPayment(String input) {
-        return capture(() -> ConsoleInput.runAction(
-                () -> Payment.registerFromConsole(new Scanner(input), cashRegister)));
+        return capture(
+                () ->
+                        ConsoleInput.runAction(
+                                () ->
+                                        Payment.registerFromConsole(
+                                                new Scanner(input), cashRegister)));
     }
 
     private void assertUnchanged() {
@@ -124,7 +128,6 @@ class PaymentConsoleTest {
 
     @Test
     void alreadyPaidOrderRejectsAnotherPaymentBeforeAskingForAmount() {
-        // CORREGIDO
         Payment p = new Payment("P1", 100, new Date(27, 10, 2026), PaymentMethod.CASH);
         p.setWorkOrder(order);
         p.registerPayment(cashRegister);
@@ -138,7 +141,6 @@ class PaymentConsoleTest {
 
     @Test
     void successiveInstallmentsAndFinalPaymentPreserveTotalsAndRejectDuplicate() {
-        // CORREGIDO
         Payment first = new Payment("P1", 25, new Date(27, 10, 2026), PaymentMethod.CASH);
         first.setWorkOrder(order);
         first.registerPayment(cashRegister);
@@ -153,7 +155,8 @@ class PaymentConsoleTest {
         third.setWorkOrder(order);
         third.registerPayment(cashRegister);
 
-        assertThrowsExactly(InvalidPaymentException.class, () -> first.registerPayment(cashRegister));
+        assertThrowsExactly(
+                InvalidPaymentException.class, () -> first.registerPayment(cashRegister));
         assertEquals(0, order.getBalance());
         assertEquals(100, order.calculateTotalPaid());
         assertEquals(100, cashRegister.calculateIncome());

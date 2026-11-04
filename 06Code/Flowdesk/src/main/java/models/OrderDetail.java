@@ -8,15 +8,18 @@ public class OrderDetail {
     private int quantity;
     private String description;
     private double unitPrice;
+    private boolean completed; // <-- IMPORTANTE: Debe ser un boolean, NO transient
 
     private transient CatalogItem catalogItem;
 
-    public OrderDetail(String detailId, String itemName, int quantity, String description, double unitPrice) {
+    public OrderDetail(
+            String detailId, String itemName, int quantity, String description, double unitPrice) {
         this.detailId = detailId;
         this.itemName = itemName;
         this.quantity = quantity;
         this.description = description;
         this.unitPrice = unitPrice;
+        this.completed = false;
         validate();
     }
 
@@ -41,22 +44,13 @@ public class OrderDetail {
     public String getDescription() { return description; }
     public double getUnitPrice() { return unitPrice; }
 
+    public boolean isCompleted() { return completed; }
+    public void setCompleted(boolean completed) { this.completed = completed; }
+
     public CatalogItem getCatalogItem() { return catalogItem; }
     public void setCatalogItem(CatalogItem catalogItem) { this.catalogItem = catalogItem; }
-
-    public void setProduct(Product product) { 
-        this.catalogItem = product; 
-    }
-
-    public void setService(Service service) { 
-        this.catalogItem = service; 
-    }
-
-    public Product getProduct() { 
-        return (catalogItem instanceof Product) ? (Product) catalogItem : null; 
-    }
-
-    public Service getService() { 
-        return (catalogItem instanceof Service) ? (Service) catalogItem : null; 
-    }
+    public void setProduct(Product product) { this.catalogItem = product; }
+    public void setService(Service service) { this.catalogItem = service; }
+    public Product getProduct() { return (catalogItem instanceof Product) ? (Product) catalogItem : null; }
+    public Service getService() { return (catalogItem instanceof Service) ? (Service) catalogItem : null; }
 }

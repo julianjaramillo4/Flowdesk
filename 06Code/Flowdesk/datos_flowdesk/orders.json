@@ -1,0 +1,121 @@
+[
+  {
+    "orderId": "WO-1",
+    "date": {
+      "day": 28,
+      "month": 10,
+      "year": 2026
+    },
+    "total": 35.0,
+    "balance": 25.0,
+    "status": "IN_PROGRESS",
+    "customer": {
+      "customerId": "DEMO-C001",
+      "name": "Papeleria Aurora (Demo)",
+      "phone": "0990000001",
+      "idNumber": "DEMO-001",
+      "address": "Quito - direccion ficticia"
+    },
+    "details": [
+      {
+        "detailId": "DEMO-D001",
+        "itemName": "Tarjetas de presentacion",
+        "quantity": 100,
+        "description": "100 tarjetas a color",
+        "unitPrice": 0.2,
+        "completed": true
+      },
+      {
+        "detailId": "DEMO-D002",
+        "itemName": "Diseno grafico",
+        "quantity": 1,
+        "description": "Diseno para tarjetas",
+        "unitPrice": 15.0,
+        "completed": false
+      }
+    ],
+    "payments": [
+      {
+        "paymentId": "DEMO-PAGO001",
+        "amount": 10.0,
+        "date": {
+          "day": 28,
+          "month": 10,
+          "year": 2026
+        },
+        "paymentMethod": "CASH",
+        "orderId": "WO-1",
+        "cashMovement": {
+          "movementId": "MOV-DEMO-PAGO001",
+          "type": "INCOME",
+          "amount": 10.0,
+          "date": {
+            "day": 28,
+            "month": 10,
+            "year": 2026
+          },
+          "reason": "Pago Orden WO-1",
+          "paymentMethod": "CASH"
+        }
+      }
+    ]
+  },
+  {
+    "orderId": "WO-2",
+    "date": {
+      "day": 28,
+      "month": 10,
+      "year": 2026
+    },
+    "total": 30.0,
+    "balance": 30.0,
+    "status": "WAITING",
+    "customer": {
+      "customerId": "DEMO-C002",
+      "name": "Cafeteria El Mirador (Demo)",
+      "phone": "0990000002",
+      "idNumber": "DEMO-002",
+      "address": "Sangolqui - direccion ficticia"
+    },
+    "details": [
+      {
+        "detailId": "DEMO-D003",
+        "itemName": "Volante publicitario",
+        "quantity": 200,
+        "description": "200 volantes para cafeteria",
+        "unitPrice": 0.15,
+        "completed": false
+      }
+    ],
+    "payments": []
+  },
+  {
+    "orderId": "WO-3",
+    "date": {
+      "day": 28,
+      "month": 10,
+      "year": 2026
+    },
+    "total": 9.0,
+    "balance": 9.0,
+    "status": "COMPLETED",
+    "customer": {
+      "customerId": "DEMO-C003",
+      "name": "Club Universitario (Demo)",
+      "phone": "0990000003",
+      "idNumber": "DEMO-003",
+      "address": "Quito - campus ficticio"
+    },
+    "details": [
+      {
+        "detailId": "DEMO-D004",
+        "itemName": "Anillado",
+        "quantity": 3,
+        "description": "Tres documentos anillados",
+        "unitPrice": 3.0,
+        "completed": true
+      }
+    ],
+    "payments": []
+  }
+]

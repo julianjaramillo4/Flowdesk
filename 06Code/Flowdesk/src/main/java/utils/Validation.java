@@ -3,11 +3,18 @@ package utils;
 import exceptions.ValidationException;
 
 public final class Validation {
-    private Validation() { }
+    private Validation() {}
 
     public static void requireText(String value, String fieldName) {
         if (value == null || value.isBlank()) {
             throw new ValidationException("El campo " + fieldName + " es obligatorio.");
+        }
+    }
+
+    public static void requireNumericText(String value, String fieldName) {
+        requireText(value, fieldName);
+        if (!value.matches("\\d+")) {
+            throw new ValidationException("El campo " + fieldName + " debe contener solo numeros.");
         }
     }
 
@@ -25,13 +32,15 @@ public final class Validation {
 
     public static void requireNonNegativeAmount(double value, String fieldName) {
         if (!Double.isFinite(value) || value < 0) {
-            throw new ValidationException("El campo " + fieldName + " debe ser finito y mayor o igual a 0.");
+            throw new ValidationException(
+                    "El campo " + fieldName + " debe ser finito y mayor o igual a 0.");
         }
     }
 
     public static void requirePositiveAmount(double value, String fieldName) {
         if (!Double.isFinite(value) || value <= 0) {
-            throw new ValidationException("El campo " + fieldName + " debe ser finito y mayor a 0.");
+            throw new ValidationException(
+                    "El campo " + fieldName + " debe ser finito y mayor a 0.");
         }
     }
 

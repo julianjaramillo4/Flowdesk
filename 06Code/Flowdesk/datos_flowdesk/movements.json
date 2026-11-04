@@ -1,0 +1,38 @@
+[
+  {
+    "movementId": "DEMO-M001",
+    "type": "INCOME",
+    "amount": 100.0,
+    "date": {
+      "day": 28,
+      "month": 10,
+      "year": 2026
+    },
+    "reason": "Fondo inicial de caja - demostracion",
+    "paymentMethod": "CASH"
+  },
+  {
+    "movementId": "DEMO-M002",
+    "type": "EXPENSE",
+    "amount": 12.0,
+    "date": {
+      "day": 28,
+      "month": 10,
+      "year": 2026
+    },
+    "reason": "Compra de papel - demostracion",
+    "paymentMethod": "CASH"
+  },
+  {
+    "movementId": "MOV-DEMO-PAGO001",
+    "type": "INCOME",
+    "amount": 10.0,
+    "date": {
+      "day": 28,
+      "month": 10,
+      "year": 2026
+    },
+    "reason": "Pago Orden WO-1",
+    "paymentMethod": "CASH"
+  }
+]

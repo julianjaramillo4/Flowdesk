@@ -1,0 +1,345 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="JUnit Jupiter" tests="171" skipped="0" failures="0" errors="0" time="0.407" timestamp="2026-10-27T15:45:31">
+  <testcase name="detailTextFieldsRejectMissingValues(String)[4]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="detailTextFieldsRejectMissingValues(String)[3]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="detailTextFieldsRejectMissingValues(String)[5]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0.001">
+</testcase>
+  <testcase name="testExistingUserLoginFailure()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="requiredFieldsAreCheckedOutsideConsole()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.001">
+</testcase>
+  <testcase name="detailTextFieldsRejectMissingValues(String)[2]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0.001">
+</testcase>
+  <testcase name="detailTextFieldsRejectMissingValues(String)[1]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0.002">
+</testcase>
+  <testcase name="invalidAccountDataIsRejectedWithoutRecreatingAccounts()" classname="com.mycompany.flowdesk.AccountPersistenceTest" time="0">
+</testcase>
+  <testcase name="testPartialPaymentReducesBalance()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testMonthlyReportSelection()" classname="com.mycompany.flowdesk.JaramilloTest" time="0.001">
+</testcase>
+  <testcase name="testMultipleDirectIncomeAdds()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="overflowingOrderTotalIsRejectedBeforeRegistration()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.011">
+</testcase>
+  <testcase name="allRolesAreRecoveredAndAuthenticateWithoutRegistration()" classname="com.mycompany.flowdesk.AccountPersistenceTest" time="0.035">
+</testcase>
+  <testcase name="testCashMovementConsoleIncome()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="duplicateCustomerIdAndNationalIdDoNotChangeRegistry()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="unknownOrderDoesNotChangeCash()" classname="com.mycompany.flowdesk.PaymentConsoleTest" time="0">
+</testcase>
+  <testcase name="customerMenuContinuesAfterBusinessValidationFailure()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.004">
+</testcase>
+  <testcase name="testCalculateOrderTotalMultipleDetails()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testServicePriceAndCategory()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="catalogIdsMustBeUniqueIgnoringCaseAndOuterWhitespace()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="orderCreationRetriesInvalidQuantityAndMenuOption()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0.014">
+</testcase>
+  <testcase name="testAddIncomeDirectly()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testAddExpenseDirectly()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="missingFileAllowsFirstRun()" classname="com.mycompany.flowdesk.AccountPersistenceTest" time="0.001">
+</testcase>
+  <testcase name="retriesNonPositiveQuantities()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0">
+</testcase>
+  <testcase name="testExpenseMovementIncreasesExpenses()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testDashboardCountsTwoApprovedOrders()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="accountIdDoesNotDependOnTranslatedRole()" classname="com.mycompany.flowdesk.DisplayLanguageTest" time="0">
+</testcase>
+  <testcase name="testDailyReportSelection()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="consoleReportsEmptyOrderWithoutSavingIt()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="testNegativeCashRegisterBalance()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="changingRegisteredUserCannotIntroduceDuplicates()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="invalidAmountsAndPaymentMethodsRetryBeforeOneValidPayment()" classname="com.mycompany.flowdesk.PaymentConsoleTest" time="0">
+</testcase>
+  <testcase name="jsonKeepsEnglishIdentifiersAndLoadsExistingValues()" classname="com.mycompany.flowdesk.DisplayLanguageTest" time="0">
+</testcase>
+  <testcase name="testCashRegisterStartingValues()" classname="com.mycompany.flowdesk.GuanunaTest" time="0.001">
+</testcase>
+  <testcase name="testCustomerConsoleRejectsDuplicateId()" classname="com.mycompany.flowdesk.GuanunaTest" time="0.001">
+</testcase>
+  <testcase name="testProductPrice()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="cancelledCustomerFormReturnsToMenuWithoutSaving()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0.001">
+</testcase>
+  <testcase name="testExistingUserLoginSuccess()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testChangeWorkOrderStatus()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="accountTextFieldsRejectMissingValues(String)[2]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="accountTextFieldsRejectMissingValues(String)[1]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0.001">
+</testcase>
+  <testcase name="accountTextFieldsRejectMissingValues(String)[4]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="integerLimitsAreAcceptedAfterOverflowIsRejected()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0.001">
+</testcase>
+  <testcase name="accountTextFieldsRejectMissingValues(String)[3]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="testSearchCustomerIdIgnoringCase()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testMultipleDirectExpenseAdds()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="accountTextFieldsRejectMissingValues(String)[5]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="testLoginUsernameCaseSensitive()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testDashboardRejectsEmptyDisplayGracefully()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testDashboardCountsOneWaitingOrder()" classname="com.mycompany.flowdesk.JaramilloTest" time="0.001">
+</testcase>
+  <testcase name="testTwoExpenseMovementsAreAccumulated()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="requiredTextRetriesBlankAndPreservesPasswordCharacters()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0">
+</testcase>
+  <testcase name="testDashboardCountsCompletedOrder()" classname="com.mycompany.flowdesk.JaramilloTest" time="0.005">
+</testcase>
+  <testcase name="retriesMalformedOverflowAndOutOfRangeOptions()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0.001">
+</testcase>
+  <testcase name="testRegisterProduct()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testCalculateEmptyOrderTotal()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="accountIsSavedBeforeFirstLoginReturns()" classname="com.mycompany.flowdesk.AccountPersistenceTest" time="0.006">
+</testcase>
+  <testcase name="testFullPaymentClearsBalance()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="fullTransferPaymentClearsBalance()" classname="com.mycompany.flowdesk.PaymentConsoleTest" time="0.003">
+</testcase>
+  <testcase name="testLoginValidCredentials()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testCreateWorkOrder()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="explicitDataDirectoryDoesNotDependOnWorkingDirectory()" classname="com.mycompany.flowdesk.AccountPersistenceTest" time="0">
+</testcase>
+  <testcase name="missingPaymentFieldsAndWrongOrderAreRejected()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.001">
+</testcase>
+  <testcase name="cancellationAfterInvalidAmountLeavesFollowingMenuOptionAvailable()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0.001">
+</testcase>
+  <testcase name="testLoginIncorrectUsername()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testIncomeMovementIncreasesIncome()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testPaymentExceedingBalanceIsInvalid()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testCashMovementConsolePrintsConfirmation()" classname="com.mycompany.flowdesk.GuanunaTest" time="0.001">
+</testcase>
+  <testcase name="failedSaveRollsBackAccountCreation()" classname="com.mycompany.flowdesk.AccountPersistenceTest" time="0.009">
+</testcase>
+  <testcase name="zeroAndNegativeQuantitiesAreRejected()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.001">
+</testcase>
+  <testcase name="catalogTextFieldsRejectMissingValues(String)[1]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="catalogTextFieldsRejectMissingValues(String)[2]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="testRegisterMultipleProducts()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="catalogTextFieldsRejectMissingValues(String)[3]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="catalogTextFieldsRejectMissingValues(String)[4]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0.011">
+</testcase>
+  <testcase name="catalogTextFieldsRejectMissingValues(String)[5]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="testFirstLoginRegistersEmployee()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0.001">
+</testcase>
+  <testcase name="testProductCategory()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="cancelledCatalogFormReturnsToCatalogWithoutSaving()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0.003">
+</testcase>
+  <testcase name="testPaymentWithoutWorkOrderIsInvalid()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="overpaymentIsRejectedAndNextAttemptCanSucceed()" classname="com.mycompany.flowdesk.PaymentConsoleTest" time="0.002">
+</testcase>
+  <testcase name="testReportCalculatesOutstandingBalance()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="duplicateUserNameIdOrRoleIsRejected()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.001">
+</testcase>
+  <testcase name="testDashboardStartsWithoutOrders()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testCreateCategory()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testDashboardCountsDeliveredOrder()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testReportEmptyOrders()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testSearchCustomerWithEmptyRegistry()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testRegisterMultipleCustomers()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testSearchExistingCategory()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="paymentAddedDirectlyIsAlsoProtectedAgainstReregistration()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="testRegisterOneCustomer()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="deserializedInvalidObjectsAreValidatedBeforeRegistration()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.003">
+</testcase>
+  <testcase name="testSearchCustomerByNationalId()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testSearchCustomerById()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testPaymentMethodGetter()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testReportCountsPendingOrders()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testNewWorkOrderHasEmptyDetailsAndPayments()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testCustomerContactFields()" classname="com.mycompany.flowdesk.GuanunaTest" time="0.001">
+</testcase>
+  <testcase name="testReportDisplaysNetBalance()" classname="com.mycompany.flowdesk.JaramilloTest" time="0.002">
+</testcase>
+  <testcase name="testSearchUnknownCustomer()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="everyCustomerTextFieldRejectsMissingValue(String)[1]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0.01">
+</testcase>
+  <testcase name="everyCustomerTextFieldRejectsMissingValue(String)[3]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="testDashboardDisplaysTotalOrderCount()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="successiveInstallmentsAndFinalPaymentPreserveTotalsAndRejectDuplicate()" classname="com.mycompany.flowdesk.PaymentConsoleTest" time="0.003">
+</testcase>
+  <testcase name="everyCustomerTextFieldRejectsMissingValue(String)[2]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="invalidPricesAreRejectedAndZeroIsAllowed()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="everyCustomerTextFieldRejectsMissingValue(String)[5]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="everyCustomerTextFieldRejectsMissingValue(String)[4]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="testReportCountsCompletedAndDeliveredOrders()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testLoginPasswordCaseSensitive()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testNegativePaymentAmountIsInvalid()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="cancellationWorksForEveryReader()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0.001">
+</testcase>
+  <testcase name="testIncomeMovementDoesNotIncreaseExpenses()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testSearchNonExistentCategory()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testTwoIncomeMovementsAreAccumulated()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testLoginBothCredentialsIncorrect()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testCalculateOrderTotalSingleDetail()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="consoleCatchesPaymentExceptionWithoutShowingStackTrace()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.002">
+</testcase>
+  <testcase name="testReportRejectsUnknownOption()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testPaymentDetailsIncludeIdAndMethod()" classname="com.mycompany.flowdesk.JaramilloTest" time="0.001">
+</testcase>
+  <testcase name="testReportDisplaysCashIncome()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testPaymentIdGetter()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="duplicateOrderAndDetailIdsAreRejected()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="testFirstLoginRegistersManager()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="rejectsNonFiniteNegativeAndMalformedAmounts()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0.001">
+</testcase>
+  <testcase name="testEmptyCashRegisterBalance()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testCashRegisterSetIncome()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testCustomerNameField()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testValidCashPaymentAmount()" classname="com.mycompany.flowdesk.JaramilloTest" time="0.001">
+</testcase>
+  <testcase name="testCashMovementConsoleExpense()" classname="com.mycompany.flowdesk.GuanunaTest" time="0.001">
+</testcase>
+  <testcase name="testDashboardListsPendingOrderId()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="testNewWorkOrderInitialStatus()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="invalidCashAmountsDoNotChangeCashRegister()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="testPaymentAmountZeroIsInvalid()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="exhaustedInputDoesNotRetryForever()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0">
+</testcase>
+  <testcase name="duplicateMovementDoesNotIncreaseCashTwice()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="persistenceExceptionPreservesTechnicalCause()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.001">
+</testcase>
+  <testcase name="alreadyPaidOrderRejectsAnotherPaymentBeforeAskingForAmount()" classname="com.mycompany.flowdesk.PaymentConsoleTest" time="0">
+</testcase>
+  <testcase name="everyCategoryTextFieldRejectsMissingValue(String)[5]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0.001">
+</testcase>
+  <testcase name="testPaymentAmountGetter()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="everyCategoryTextFieldRejectsMissingValue(String)[4]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="testRegisterService()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0.007">
+</testcase>
+  <testcase name="testExpenseMovementDoesNotIncreaseIncome()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="everyCategoryTextFieldRejectsMissingValue(String)[3]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0">
+</testcase>
+  <testcase name="everyCategoryTextFieldRejectsMissingValue(String)[2]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0.001">
+</testcase>
+  <testcase name="testMixedMovementsUpdateBalance()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="everyCategoryTextFieldRejectsMissingValue(String)[1]" classname="com.mycompany.flowdesk.RequiredFieldsValidationTest" time="0.001">
+</testcase>
+  <testcase name="testSearchCategoryCaseInsensitive()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="testCalculateOrderDetailSubtotal()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+  <testcase name="paymentAndCashAreUpdatedOnceTogether()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.001">
+</testcase>
+  <testcase name="partialCashPaymentUpdatesOrderAndCashTogether()" classname="com.mycompany.flowdesk.PaymentConsoleTest" time="0">
+</testcase>
+  <testcase name="testRegisterPaymentWithoutOrderThrows()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="emptyOrderCannotBeRegistered()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="consoleHidesTechnicalCauseOfPersistenceFailure()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0.002">
+</testcase>
+  <testcase name="rejectedMovementDoesNotPartiallyRegisterPayment()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="malformedAccountFileIsPreservedAndExistingMemoryIsRestored()" classname="com.mycompany.flowdesk.AccountPersistenceTest" time="0.125">
+</testcase>
+  <testcase name="testCashRegisterPrintedBalance()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="testCashRegisterSetExpenses()" classname="com.mycompany.flowdesk.GuanunaTest" time="0">
+</testcase>
+  <testcase name="cancellingPaymentMethodLeavesOrderAndCashUnchanged()" classname="com.mycompany.flowdesk.PaymentConsoleTest" time="0.001">
+</testcase>
+  <testcase name="invalidPaymentsLeaveOrderUnchanged()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="testWeeklyReportSelection()" classname="com.mycompany.flowdesk.JaramilloTest" time="0">
+</testcase>
+  <testcase name="samePaymentObjectCannotBeRegisteredTwiceOrMoved()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="positiveAmountRetriesZero()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0">
+</testcase>
+  <testcase name="optionBoundsAreInclusiveAndDoNotConsumeFollowingField()" classname="com.mycompany.flowdesk.ConsoleInputTest" time="0.001">
+</testcase>
+  <testcase name="customerLabelsAreSpanish()" classname="com.mycompany.flowdesk.DisplayLanguageTest" time="0.003">
+</testcase>
+  <testcase name="testDashboardCountsInProgressOrder()" classname="com.mycompany.flowdesk.JaramilloTest" time="0.007">
+</testcase>
+  <testcase name="testDashboardAcceptsOrderList()" classname="com.mycompany.flowdesk.JaramilloTest" time="0.002">
+</testcase>
+  <testcase name="duplicatePaymentIdIsRejectedWithinAndAcrossRegisteredOrders()" classname="com.mycompany.flowdesk.BusinessValidationTest" time="0">
+</testcase>
+  <testcase name="testLoginIncorrectPassword()" classname="com.mycompany.flowdesk.LanchimbaTest" time="0">
+</testcase>
+</testsuite>

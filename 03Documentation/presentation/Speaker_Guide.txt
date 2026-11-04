@@ -1,0 +1,29 @@
+1. Flowdesk
+Hello. Today we will present Flowdesk. It is a Java system for a print shop. It helps us organize customers, orders, and payments.
+
+2. The project goal
+Our goal is to organize the work of a print shop. We keep customer information. We create orders and record payments. We also export reports.
+
+3. User roles
+The employee works with customers and orders. The cashier records payments. The manager checks reports and the cash balance.
+
+4. The order process
+First, we select a customer. Then we add products or services. We create the order and record a payment. Finally, we check the remaining balance.
+
+5. Main classes
+A class represents an object in the business. Customer stores customer information. WorkOrder groups the order details and payments. CashRegister keeps the cash totals.
+
+6. Object-oriented programming
+We use four object-oriented programming concepts. We protect data with private fields. Product and Service inherit from CatalogItem. CatalogItem is abstract. Each child class has its own getItemType method.
+
+7. Data storage
+DataManager handles the files. Gson converts Java objects to JSON and back. The system loads data at startup. It saves data during normal shutdown, so we can open the program again and keep our information.
+
+8. Payments and cash
+This is an example with fictional data. The order costs thirty-five dollars. The customer pays ten dollars. The remaining balance is twenty-five dollars. Cash starts with one hundred dollars. After the payment and a twelve-dollar expense, the balance is ninety-eight dollars.
+
+9. Validation and reports
+The system checks required fields and amounts. Login also checks the selected role. We use exceptions to show errors. We export orders and cash movements to CSV files.
+
+10. Live demonstration
+Now we will show the system. We will open the customer list and the catalog. Then we will show an order, its payment, and the cash balance. Finally, we will export a report and open the JSON files. Thank you. Do you have any questions?

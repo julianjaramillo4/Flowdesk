@@ -1,0 +1,26 @@
+[
+  {
+    "userId": "U_MANAGER",
+    "username": "Gerente",
+    "password": "Genrente",
+    "role": "MANAGER"
+  },
+  {
+    "userId": "U_MANAGER_1793194507933",
+    "username": "Daniel Lanchimba",
+    "password": "200603",
+    "role": "MANAGER"
+  },
+  {
+    "userId": "U_CASHIER",
+    "username": "Cristopher Lanchimba",
+    "password": "111222333",
+    "role": "CASHIER"
+  },
+  {
+    "userId": "U_EMPLOYEE",
+    "username": "admin",
+    "password": "Joquin loza",
+    "role": "EMPLOYEE"
+  }
+]

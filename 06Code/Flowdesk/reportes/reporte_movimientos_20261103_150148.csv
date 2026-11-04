@@ -1,0 +1,4 @@
+ID,Fecha,Tipo,Motivo,metodoPago,Monto
+MOV-1,03/11/2026 15:01,INCOME,Fondo inicial de caja - demostracion,CASH,100,00
+MOV-2,03/11/2026 15:01,EXPENSE,Compra de papel - demostracion,CASH,12,00
+MOV-3,03/11/2026 15:01,INCOME,Pago Orden WO-1,CASH,10,00

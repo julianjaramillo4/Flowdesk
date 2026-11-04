@@ -6,7 +6,7 @@ import exceptions.ValidationException;
 import exceptions.PersistenceException;
 
 public final class ConsoleInput {
-    private ConsoleInput() { }
+    private ConsoleInput() {}
 
     private static String readLine(Scanner scanner, String prompt) {
         System.out.print(prompt);
@@ -24,6 +24,16 @@ public final class ConsoleInput {
                 return value;
             }
             System.out.println("Este campo es obligatorio.");
+        }
+    }
+
+    public static String readNumericText(Scanner scanner, String prompt) {
+        while (true) {
+            String value = readLine(scanner, prompt).trim();
+            if (!value.isBlank() && value.matches("\\d+")) {
+                return value;
+            }
+            System.out.println("Error: Este campo solo acepta numeros. Intente de nuevo.");
         }
     }
 
@@ -73,11 +83,12 @@ public final class ConsoleInput {
                     return amount;
                 }
             } catch (NumberFormatException exception) {
-
+                // Ignorado para volver a pedir
             }
-            System.out.println(allowZero
-                    ? "Ingrese un monto valido mayor o igual a 0 (use punto decimal)."
-                    : "Ingrese un monto valido mayor a 0 (use punto decimal).");
+            System.out.println(
+                    allowZero
+                            ? "Ingrese un monto valido mayor o igual a 0 (use punto decimal)."
+                            : "Ingrese un monto valido mayor a 0 (use punto decimal).");
         }
     }
 

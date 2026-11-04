@@ -1,0 +1,24 @@
+[
+  {
+    "id": "DEMO-S001",
+    "name": "Diseno grafico",
+    "description": "Diseno de una pieza publicitaria",
+    "price": 15.0,
+    "category": {
+      "categoryId": "DEMO-CAT01",
+      "name": "Impresion y acabados",
+      "description": "Catalogo ficticio para exposicion"
+    }
+  },
+  {
+    "id": "DEMO-S002",
+    "name": "Anillado",
+    "description": "Anillado de documento",
+    "price": 3.0,
+    "category": {
+      "categoryId": "DEMO-CAT01",
+      "name": "Impresion y acabados",
+      "description": "Catalogo ficticio para exposicion"
+    }
+  }
+]

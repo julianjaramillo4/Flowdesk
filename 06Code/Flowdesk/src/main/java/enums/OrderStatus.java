@@ -1,7 +1,11 @@
 package enums;
 
 public enum OrderStatus {
-    WAITING, APPROVED, IN_PROGRESS, COMPLETED, DELIVERED;
+    WAITING,
+    APPROVED,
+    IN_PROGRESS,
+    COMPLETED,
+    DELIVERED;
 
     @Override
     public String toString() {

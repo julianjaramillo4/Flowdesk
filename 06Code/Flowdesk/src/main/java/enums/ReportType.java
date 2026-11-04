@@ -1,7 +1,9 @@
 package enums;
 
 public enum ReportType {
-    DAILY, WEEKLY, MONTHLY;
+    DAILY,
+    WEEKLY,
+    MONTHLY;
 
     @Override
     public String toString() {

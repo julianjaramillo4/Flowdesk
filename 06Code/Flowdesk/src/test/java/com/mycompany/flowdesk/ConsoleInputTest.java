@@ -49,22 +49,28 @@ class ConsoleInputTest {
 
     @Test
     void requiredTextRetriesBlankAndPreservesPasswordCharacters() {
-        assertEquals(" secret ", ConsoleInput.readRequiredText(new Scanner("\n   \n secret \n"), "Texto: "));
+        assertEquals(
+                " secret ",
+                ConsoleInput.readRequiredText(new Scanner("\n   \n secret \n"), "Texto: "));
     }
 
     @Test
     void cancellationWorksForEveryReader() {
-        assertThrows(CancellationException.class,
+        assertThrows(
+                CancellationException.class,
                 () -> ConsoleInput.readRequiredText(new Scanner(":cancelar\n"), "Texto: "));
-        assertThrows(CancellationException.class,
+        assertThrows(
+                CancellationException.class,
                 () -> ConsoleInput.readPositiveInt(new Scanner(":cancelar\n"), "Cantidad: "));
-        assertThrows(CancellationException.class,
+        assertThrows(
+                CancellationException.class,
                 () -> ConsoleInput.readAmount(new Scanner(":cancelar\n"), "Monto: "));
     }
 
     @Test
     void exhaustedInputDoesNotRetryForever() {
-        assertThrows(NoSuchElementException.class,
+        assertThrows(
+                NoSuchElementException.class,
                 () -> ConsoleInput.readInt(new Scanner("abc\n"), "Opcion: "));
     }
 
@@ -86,7 +92,8 @@ class ConsoleInputTest {
     @Test
     void cancellationAfterInvalidAmountLeavesFollowingMenuOptionAvailable() {
         Scanner input = new Scanner("texto\n-1\n :CANCELAR \n0\n");
-        assertThrows(CancellationException.class,
+        assertThrows(
+                CancellationException.class,
                 () -> ConsoleInput.readPositiveAmount(input, "Monto: "));
         assertEquals(0, ConsoleInput.readOption(input, "Opcion: ", 0, 3));
     }

@@ -1,0 +1,26 @@
+[
+  {
+    "userId": "U_EMPLOYEE",
+    "username": "joquin loza",
+    "password": "20000004",
+    "role": "EMPLOYEE"
+  },
+  {
+    "userId": "U_MANAGER",
+    "username": "julian",
+    "password": "123",
+    "role": "MANAGER"
+  },
+  {
+    "userId": "U_CASHIER",
+    "username": "cristopher",
+    "password": "777555333",
+    "role": "CASHIER"
+  },
+  {
+    "userId": "U_EMPLOYEE_1793755407894",
+    "username": "dsadsa",
+    "password": "dsadas",
+    "role": "EMPLOYEE"
+  }
+]

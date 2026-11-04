@@ -1,0 +1,40 @@
+FLOWDESK - UNIT TEST EXECUTION EVIDENCE
+Evidence date: 2026-10-27
+Repository revision: 5e69dfe1d50fe696aac074564403a5d65e30a8d8
+Sources: 06Code/Flowdesk/src and 06Code/Flowdesk/test
+Environment: Windows; Java 21.0.12; javac UTF-8
+Runner: JUnit Platform Console Standalone 1.10.3
+Dependency: Gson 2.14.0
+Build and reports generated in a temporary directory.
+Test execution exit code: 0
+
+Test run finished after 499 ms
+[        17 containers found      ]
+[         0 containers skipped    ]
+[        17 containers started    ]
+[         0 containers aborted    ]
+[        17 containers successful ]
+[         0 containers failed     ]
+[       171 tests found           ]
+[         0 tests skipped         ]
+[       171 tests started         ]
+[         0 tests aborted         ]
+[       171 tests successful      ]
+[         0 tests failed          ]
+
+TEST CLASSES
+AccountPersistenceTest: 7 executed, 7 passed
+BusinessValidationTest: 25 executed, 25 passed
+ConsoleInputTest: 13 executed, 13 passed
+DisplayLanguageTest: 3 executed, 3 passed
+GuanunaTest: 30 executed, 30 passed
+JaramilloTest: 30 executed, 30 passed
+LanchimbaTest: 30 executed, 30 passed
+PaymentConsoleTest: 8 executed, 8 passed
+RequiredFieldsValidationTest: 25 executed, 25 passed
+
+The XML preserves all 171 test cases and outcomes.
+Machine properties, hostname and captured console output are omitted from the shared XML.
+Parameterized invocations count as separate executed test cases.
+This is a JUnit Console execution, not a Maven or CI execution.
+The result applies to the recorded revision; it is not evidence of later integrations.

@@ -19,14 +19,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DataManagerTest {
 
-    @TempDir
-    Path tempDir;
+    @TempDir Path tempDir;
 
     @BeforeEach
     void setUp() {
         System.setProperty("flowdesk.dataDirectory", tempDir.toString());
         DataManager.init();
-        
+
         Customer.setAll(new ArrayList<>());
         Category.setAll(new ArrayList<>());
         Product.setAll(new ArrayList<>());
@@ -87,7 +86,7 @@ public class DataManagerTest {
 
         assertEquals(1, WorkOrder.getAll().size());
         WorkOrder loadedOrder = WorkOrder.getAll().get(0);
-        
+
         assertEquals(100.0, loadedOrder.getTotal());
         assertEquals(50.0, loadedOrder.getBalance());
         assertEquals(1, loadedOrder.getPayments().size());
@@ -97,17 +96,23 @@ public class DataManagerTest {
     @Test
     void testSaveAndLoadCashMovements() {
         CashRegister cash = new CashRegister();
-        
-        CashMovement m = new CashMovement("M1", MovementType.INCOME, 100.0, Date.now(), "Venta", PaymentMethod.CASH);
+
+        CashMovement m =
+                new CashMovement(
+                        "M1", MovementType.INCOME, 100.0, Date.now(), "Venta", PaymentMethod.CASH);
         m.registerMovement(cash);
 
         DataManager.saveList(CashMovement.getAll(), "movements");
         DataManager.saveCashRegister(cash);
 
         CashMovement.setAll(new ArrayList<>());
-        
+
         CashRegister loadedCash = DataManager.loadCashRegister();
-        CashMovement.setAll(DataManager.loadList("movements", new com.google.gson.reflect.TypeToken<ArrayList<CashMovement>>(){}.getType()));
+        CashMovement.setAll(
+                DataManager.loadList(
+                        "movements",
+                        new com.google.gson.reflect.TypeToken<
+                                ArrayList<CashMovement>>() {}.getType()));
 
         assertEquals(1, CashMovement.getAll().size());
         assertEquals("M1", CashMovement.getAll().get(0).getMovementId());
@@ -120,8 +125,10 @@ public class DataManagerTest {
         Path badFile = tempDir.resolve("customers.json");
         Files.writeString(badFile, "{ esto no es un json valido }");
 
-        assertThrows(PersistenceException.class, () -> {
-            DataManager.loadAll();
-        });
+        assertThrows(
+                PersistenceException.class,
+                () -> {
+                    DataManager.loadAll();
+                });
     }
 }

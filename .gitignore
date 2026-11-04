@@ -5,3 +5,5 @@
 /06Code/Flowdesk/nbproject/private/
 /06Code/FlowDeskTests/
 *.class
+/06Code/Flowdesk/target/
+/.slides-build/

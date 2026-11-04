@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  package com.mycompany.flowdesk;
+=======
+package com.mycompany.flowdesk;
+>>>>>>> 6eafda688a8232aa3874123faeb60417b132a3b0
 
 import data.DataManager;
 import enums.Role;
@@ -16,8 +20,7 @@ import org.junit.jupiter.api.io.TempDir;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountPersistenceTest {
-    @TempDir
-    Path directory;
+    @TempDir Path directory;
     private String previousDirectory;
     private ArrayList<User> previousUsers;
 
@@ -41,9 +44,10 @@ class AccountPersistenceTest {
 
     @Test
     void accountIsSavedBeforeFirstLoginReturns() throws Exception {
-        User user = User.authenticateFromConsole(Role.EMPLOYEE,
-                new Scanner("niño\ncontraseña\n"), DataManager::saveUsers);
-        assertTrue(Files.exists(directory.resolve("usuarios.json")));
+        User user =
+                User.authenticateFromConsole(
+                        Role.EMPLOYEE, new Scanner("niño\ncontraseña\n"), DataManager::saveUsers);
+        assertTrue(Files.exists(directory.resolve("users.json")));
         User.setAll(new ArrayList<>());
         DataManager.loadUsers();
         assertEquals(user.getUserId(), User.getAll().get(0).getUserId());
@@ -52,14 +56,20 @@ class AccountPersistenceTest {
 
     @Test
     void allRolesAreRecoveredAndAuthenticateWithoutRegistration() {
-        User.authenticateFromConsole(Role.MANAGER, new Scanner("manager\nsecret1\n"), DataManager::saveUsers);
-        User.authenticateFromConsole(Role.CASHIER, new Scanner("cashier\nsecret2\n"), DataManager::saveUsers);
-        User.authenticateFromConsole(Role.EMPLOYEE, new Scanner("employee\nsecret3\n"), DataManager::saveUsers);
+        User.authenticateFromConsole(
+                Role.MANAGER, new Scanner("manager\nsecret1\n"), DataManager::saveUsers);
+        User.authenticateFromConsole(
+                Role.CASHIER, new Scanner("cashier\nsecret2\n"), DataManager::saveUsers);
+        User.authenticateFromConsole(
+                Role.EMPLOYEE, new Scanner("employee\nsecret3\n"), DataManager::saveUsers);
         User.setAll(new ArrayList<>());
         DataManager.loadUsers();
-        assertNotNull(User.authenticateFromConsole(Role.MANAGER, new Scanner("manager\nsecret1\n")));
-        assertNotNull(User.authenticateFromConsole(Role.CASHIER, new Scanner("cashier\nsecret2\n")));
-        assertNotNull(User.authenticateFromConsole(Role.EMPLOYEE, new Scanner("employee\nsecret3\n")));
+        assertNotNull(
+                User.authenticateFromConsole(Role.MANAGER, new Scanner("manager\nsecret1\n")));
+        assertNotNull(
+                User.authenticateFromConsole(Role.CASHIER, new Scanner("cashier\nsecret2\n")));
+        assertNotNull(
+                User.authenticateFromConsole(Role.EMPLOYEE, new Scanner("employee\nsecret3\n")));
         assertEquals(3, User.getAll().size());
     }
 
@@ -68,18 +78,24 @@ class AccountPersistenceTest {
         Path blockedDirectory = directory.resolve("blocked");
         Files.writeString(blockedDirectory, "not a directory", StandardCharsets.UTF_8);
         System.setProperty("flowdesk.dataDirectory", blockedDirectory.toString());
-        assertThrows(PersistenceException.class, () -> User.authenticateFromConsole(Role.MANAGER,
-                new Scanner("manager\nsecret\n"), DataManager::saveUsers));
+        assertThrows(
+                PersistenceException.class,
+                () ->
+                        User.authenticateFromConsole(
+                                Role.MANAGER,
+                                new Scanner("manager\nsecret\n"),
+                                DataManager::saveUsers));
         assertTrue(User.getAll().isEmpty());
         System.setProperty("flowdesk.dataDirectory", directory.toString());
-        assertNotNull(User.authenticateFromConsole(Role.MANAGER,
-                new Scanner("manager\nsecret\n"), DataManager::saveUsers));
+        assertNotNull(
+                User.authenticateFromConsole(
+                        Role.MANAGER, new Scanner("manager\nsecret\n"), DataManager::saveUsers));
     }
 
     @Test
     void malformedAccountFileIsPreservedAndExistingMemoryIsRestored() throws Exception {
         new User("U1", "manager", "secret", Role.MANAGER).register();
-        Path file = directory.resolve("usuarios.json");
+        Path file = directory.resolve("users.json");
         Files.writeString(file, "{broken", StandardCharsets.UTF_8);
         assertThrows(PersistenceException.class, DataManager::loadUsers);
         assertEquals("{broken", Files.readString(file, StandardCharsets.UTF_8));
@@ -89,7 +105,7 @@ class AccountPersistenceTest {
 
     @Test
     void invalidAccountDataIsRejectedWithoutRecreatingAccounts() throws Exception {
-        Path file = directory.resolve("usuarios.json");
+        Path file = directory.resolve("users.json");
         Files.writeString(file, "[{}]", StandardCharsets.UTF_8);
         assertThrows(PersistenceException.class, DataManager::loadUsers);
         assertEquals("[{}]", Files.readString(file, StandardCharsets.UTF_8));

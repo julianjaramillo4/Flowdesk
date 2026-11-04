@@ -1,7 +1,8 @@
 package enums;
 
 public enum MovementType {
-    INCOME, EXPENSE;
+    INCOME,
+    EXPENSE;
 
     @Override
     public String toString() {

@@ -18,7 +18,9 @@ public class Payment {
     private CashMovement cashMovement;
     private transient boolean registered;
 
-    public Payment() { }
+    private transient WorkOrder workOrderRef;
+
+    public Payment() {}
 
     public Payment(String paymentId, double amount, Date date, PaymentMethod paymentMethod) {
         this.paymentId = paymentId;
@@ -31,12 +33,15 @@ public class Payment {
         requireEditable();
         if (workOrder != null) {
             this.orderId = workOrder.getOrderId();
+            this.workOrderRef = workOrder;
         } else {
             this.orderId = null;
+            this.workOrderRef = null;
         }
     }
 
     public WorkOrder getWorkOrder() {
+        if (workOrderRef != null) return workOrderRef;
         if (orderId == null) return null;
         for (WorkOrder wo : WorkOrder.getAll()) {
             if (Validation.sameIdentifier(wo.getOrderId(), orderId)) {
@@ -61,10 +66,16 @@ public class Payment {
         }
         workOrder.calculateTotals();
         validateFor(workOrder);
-        
-        CashMovement movement = new CashMovement("MOV-" + paymentId, MovementType.INCOME,
-                amount, this.date, "Pago Orden " + workOrder.getOrderId(), paymentMethod);
-        
+
+        CashMovement movement =
+                new CashMovement(
+                        "MOV-" + paymentId,
+                        MovementType.INCOME,
+                        amount,
+                        this.date,
+                        "Pago Orden " + workOrder.getOrderId(),
+                        paymentMethod);
+
         movement.validateRegistration(cashRegister);
         registerPayment();
         movement.registerMovement(cashRegister);
@@ -79,7 +90,8 @@ public class Payment {
             throw new InvalidPaymentException("El pago pertenece a otra orden.");
         }
         if (paymentId == null || paymentId.isBlank() || date == null || paymentMethod == null) {
-            throw new InvalidPaymentException("El pago requiere identificador, fecha y metodo de pago.");
+            throw new InvalidPaymentException(
+                    "El pago requiere identificador, fecha y metodo de pago.");
         }
         rejectDuplicateId(order);
         for (WorkOrder existingOrder : WorkOrder.getAll()) {
@@ -88,7 +100,8 @@ public class Payment {
             }
         }
         if (!validateAmount()) {
-            throw new InvalidPaymentException("El monto debe ser finito, mayor a 0 y no superar el saldo pendiente.");
+            throw new InvalidPaymentException(
+                    "El monto debe ser finito, mayor a 0 y no superar el saldo pendiente.");
         }
     }
 
@@ -101,7 +114,8 @@ public class Payment {
     }
 
     private boolean isRegistered() {
-        return registered || (getWorkOrder() != null && getWorkOrder().getPayments().contains(this));
+        return registered
+                || (getWorkOrder() != null && getWorkOrder().getPayments().contains(this));
     }
 
     void markRegistered() {
@@ -115,23 +129,28 @@ public class Payment {
     }
 
     public boolean validateAmount() {
-        return getWorkOrder() != null
-                && Double.isFinite(amount)
-                && amount > 0
-                && amount <= getWorkOrder().getBalance();
+        WorkOrder wo = getWorkOrder();
+        if (wo != null) {
+            wo.calculateTotals();
+        }
+        return wo != null && Double.isFinite(amount) && amount > 0 && amount <= wo.getBalance();
     }
 
-    // ---> MÉTODO AGREGADO AQUÍ <---
     public String getPaymentDetails() {
-        return "Identificador del pago: " + paymentId
-                + ", Monto: " + amount
-                + ", Metodo: " + paymentMethod;
+        return "Identificador del pago: "
+                + paymentId
+                + ", Monto: "
+                + amount
+                + ", Metodo: "
+                + paymentMethod;
     }
 
     public static void registerFromConsole(Scanner scanner, CashRegister cashRegister) {
         System.out.println("\n--- REGISTRAR PAGO ---");
 
-        String orderIdInput = ConsoleInput.readRequiredText(scanner, "Ingrese el numero de orden a pagar (ej. WO-001): ");
+        String orderIdInput =
+                ConsoleInput.readRequiredText(
+                        scanner, "Ingrese el numero de orden a pagar (ej. WO-001): ");
 
         WorkOrder order = null;
 
@@ -152,7 +171,8 @@ public class Payment {
             return;
         }
 
-        String customerName = (order.getCustomer() != null) ? order.getCustomer().getName() : "Sin cliente";
+        String customerName =
+                (order.getCustomer() != null) ? order.getCustomer().getName() : "Sin cliente";
         System.out.println("Cliente: " + customerName);
         System.out.println("Total de la Orden: $" + order.getTotal());
         System.out.println("Saldo Pendiente: $" + order.getBalance());
@@ -160,17 +180,21 @@ public class Payment {
         double amount = ConsoleInput.readPositiveAmount(scanner, "\nMonto a pagar ahora: $");
 
         if (amount > order.getBalance()) {
-            System.out.println("Error: El monto excede el saldo pendiente ($" + order.getBalance() + ").");
+            System.out.println(
+                    "Error: El monto excede el saldo pendiente ($" + order.getBalance() + ").");
             return;
         }
 
-        int option = ConsoleInput.readOption(scanner, "Metodo de pago (1. EFECTIVO / 2. TRANSFERENCIA): ", 1, 2);
+        int option =
+                ConsoleInput.readOption(
+                        scanner, "Metodo de pago (1. EFECTIVO / 2. TRANSFERENCIA): ", 1, 2);
 
-        PaymentMethod method = switch (option) {
-            case 1 -> PaymentMethod.CASH;
-            case 2 -> PaymentMethod.TRANSFER;
-            default -> null;
-        };
+        PaymentMethod method =
+                switch (option) {
+                    case 1 -> PaymentMethod.CASH;
+                    case 2 -> PaymentMethod.TRANSFER;
+                    default -> null;
+                };
 
         if (method == null) {
             System.out.println("Metodo de pago no valido.");
@@ -193,15 +217,51 @@ public class Payment {
         }
     }
 
-    public String getPaymentId() { return paymentId; }
-    public void setPaymentId(String paymentId) { requireEditable(); this.paymentId = paymentId; }
-    public double getAmount() { return amount; }
-    public void setAmount(double amount) { requireEditable(); this.amount = amount; }
-    public Date getDate() { return date; }
-    public void setDate(Date date) { requireEditable(); this.date = date; }
-    public PaymentMethod getPaymentMethod() { return paymentMethod; }
-    public void setPaymentMethod(PaymentMethod paymentMethod) { requireEditable(); this.paymentMethod = paymentMethod; }
-    public String getOrderId() { return orderId; }
-    public CashMovement getCashMovement() { return cashMovement; }
-    public void setCashMovement(CashMovement cashMovement) { this.cashMovement = cashMovement; }
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        requireEditable();
+        this.paymentId = paymentId;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        requireEditable();
+        this.amount = amount;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        requireEditable();
+        this.date = date;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        requireEditable();
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public CashMovement getCashMovement() {
+        return cashMovement;
+    }
+
+    public void setCashMovement(CashMovement cashMovement) {
+        this.cashMovement = cashMovement;
+    }
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\com\mycompany\flowdesk\Flowdesk.java
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\data\DataManager.java
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\enums\MovementType.java
@@ -27,3 +28,33 @@ C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\reports\
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\utils\ConsoleInput.java
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\utils\Date.java
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\utils\Validation.java
+=======
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\com\mycompany\flowdesk\Flowdesk.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\data\DataManager.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\enums\MovementType.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\enums\OrderStatus.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\enums\PaymentMethod.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\enums\ReportType.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\enums\Role.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\exceptions\InvalidPaymentException.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\exceptions\PersistenceException.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\exceptions\ValidationException.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\CashMovement.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\CashRegister.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\CatalogItem.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\Category.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\Customer.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\OrderDetail.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\Payment.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\Product.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\Service.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\User.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\models\WorkOrder.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\reports\CsvExporter.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\reports\Dashboard.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\reports\Report.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\reports\ReportGenerator.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\utils\ConsoleInput.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\utils\Date.java
+E:\GIT\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\main\java\utils\Validation.java
+>>>>>>> 6eafda688a8232aa3874123faeb60417b132a3b0

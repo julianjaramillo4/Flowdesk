@@ -45,7 +45,6 @@ class BusinessValidationTest {
         return order;
     }
 
-    // CORREGIDO
     private Payment payment(String id, double amount, WorkOrder order) {
         Payment p = new Payment(id, amount, date, PaymentMethod.CASH);
         p.setWorkOrder(order);
@@ -66,19 +65,23 @@ class BusinessValidationTest {
 
     @Test
     void requiredFieldsAreCheckedOutsideConsole() {
-        assertThrows(ValidationException.class, () -> new Customer("C1", " ", "099", "171", "Quito"));
+        assertThrows(
+                ValidationException.class, () -> new Customer("C1", " ", "099", "171", "Quito"));
         assertThrows(ValidationException.class, () -> new Category(null, "Impresion", "Catalogo"));
         assertThrows(ValidationException.class, () -> new Product("P1", "Volante", "A4", 5, null));
-        assertThrows(ValidationException.class, () -> new Service("S1", "Diseno", "", 5, category()));
+        assertThrows(
+                ValidationException.class, () -> new Service("S1", "Diseno", "", 5, category()));
         assertThrows(ValidationException.class, () -> new User("U1", "ana", "", Role.EMPLOYEE));
     }
 
     @Test
     void duplicateCustomerIdAndNationalIdDoNotChangeRegistry() {
         new Customer("C1", "Ana", "099", "171", "Quito").register();
-        assertThrows(ValidationException.class,
+        assertThrows(
+                ValidationException.class,
                 () -> new Customer(" c1 ", "Luis", "099", "172", "Quito").register());
-        assertThrows(ValidationException.class,
+        assertThrows(
+                ValidationException.class,
                 () -> new Customer("C2", "Luis", "099", " 171 ", "Quito").register());
         assertEquals(1, Customer.getAll().size());
     }
@@ -89,19 +92,37 @@ class BusinessValidationTest {
         category.create();
         new Product("P1", "Volante", "A4", 0, category).register();
         new Service("S1", "Diseno", "Logo", 0, category).register();
-        assertThrows(ValidationException.class, () -> new Category(" cat1 ", "Otra", "Catalogo").create());
-        assertThrows(ValidationException.class, () -> new Product("p1", "Otro", "A4", 1, category).register());
-        assertThrows(ValidationException.class, () -> new Service("s1", "Otro", "Logo", 1, category).register());
+        assertThrows(
+                ValidationException.class,
+                () -> new Category(" cat1 ", "Otra", "Catalogo").create());
+        assertThrows(
+                ValidationException.class,
+                () -> new Product("p1", "Otro", "A4", 1, category).register());
+        assertThrows(
+                ValidationException.class,
+                () -> new Service("s1", "Otro", "Logo", 1, category).register());
         assertEquals(1, Product.getAll().size());
         assertEquals(1, Service.getAll().size());
     }
 
     @Test
     void invalidPricesAreRejectedAndZeroIsAllowed() {
-        for (double amount : new ArrayList<>(java.util.List.of(-1.0, Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY))) {
-            assertThrows(ValidationException.class, () -> new Product("P1", "Volante", "A4", amount, category()));
-            assertThrows(ValidationException.class, () -> new Service("S1", "Diseno", "Logo", amount, category()));
-            assertThrows(ValidationException.class, () -> new OrderDetail("D1", "Volante", 1, "A4", amount));
+        for (double amount :
+                new ArrayList<>(
+                        java.util.List.of(
+                                -1.0,
+                                Double.NaN,
+                                Double.POSITIVE_INFINITY,
+                                Double.NEGATIVE_INFINITY))) {
+            assertThrows(
+                    ValidationException.class,
+                    () -> new Product("P1", "Volante", "A4", amount, category()));
+            assertThrows(
+                    ValidationException.class,
+                    () -> new Service("S1", "Diseno", "Logo", amount, category()));
+            assertThrows(
+                    ValidationException.class,
+                    () -> new OrderDetail("D1", "Volante", 1, "A4", amount));
         }
         assertEquals(0, new OrderDetail("D1", "Volante", 1, "A4", 0).calculateSubtotal());
     }
@@ -109,7 +130,8 @@ class BusinessValidationTest {
     @Test
     void zeroAndNegativeQuantitiesAreRejected() {
         assertThrows(ValidationException.class, () -> new OrderDetail("D1", "Volante", 0, "A4", 1));
-        assertThrows(ValidationException.class, () -> new OrderDetail("D1", "Volante", -1, "A4", 1));
+        assertThrows(
+                ValidationException.class, () -> new OrderDetail("D1", "Volante", -1, "A4", 1));
     }
 
     @Test
@@ -148,8 +170,13 @@ class BusinessValidationTest {
     @Test
     void invalidPaymentsLeaveOrderUnchanged() {
         WorkOrder order = order("WO-1");
-        for (double amount : new ArrayList<>(java.util.List.of(0.0, -1.0, 101.0, Double.NaN, Double.POSITIVE_INFINITY))) {
-            assertThrows(InvalidPaymentException.class, () -> payment("P1", amount, order).registerPayment());
+        for (double amount :
+                new ArrayList<>(
+                        java.util.List.of(
+                                0.0, -1.0, 101.0, Double.NaN, Double.POSITIVE_INFINITY))) {
+            assertThrows(
+                    InvalidPaymentException.class,
+                    () -> payment("P1", amount, order).registerPayment());
         }
         assertEquals(100, order.getBalance());
         assertTrue(order.getPayments().isEmpty());
@@ -158,14 +185,18 @@ class BusinessValidationTest {
     @Test
     void missingPaymentFieldsAndWrongOrderAreRejected() {
         WorkOrder order = order("WO-1");
-        assertThrows(InvalidPaymentException.class, () -> payment(" ", 10, order).registerPayment());
-        // CORREGIDO
-        assertThrows(InvalidPaymentException.class, () -> {
-            Payment p = new Payment("P1", 10, date, null);
-            p.setWorkOrder(order);
-            p.registerPayment();
-        });
-        assertThrows(InvalidPaymentException.class, () -> order.addPayment(payment("P1", 10, order("WO-2"))));
+        assertThrows(
+                InvalidPaymentException.class, () -> payment(" ", 10, order).registerPayment());
+        assertThrows(
+                InvalidPaymentException.class,
+                () -> {
+                    Payment p = new Payment("P1", 10, date, null);
+                    p.setWorkOrder(order);
+                    p.registerPayment();
+                });
+        assertThrows(
+                InvalidPaymentException.class,
+                () -> order.addPayment(payment("P1", 10, order("WO-2"))));
         assertThrows(InvalidPaymentException.class, () -> order.addPayment(null));
         assertEquals(100, order.getBalance());
     }
@@ -189,8 +220,10 @@ class BusinessValidationTest {
         first.create();
         second.create();
         payment("P1", 10, first).registerPayment();
-        assertThrows(InvalidPaymentException.class, () -> payment(" p1 ", 10, first).registerPayment());
-        assertThrows(InvalidPaymentException.class, () -> payment("p1", 10, second).registerPayment());
+        assertThrows(
+                InvalidPaymentException.class, () -> payment(" p1 ", 10, first).registerPayment());
+        assertThrows(
+                InvalidPaymentException.class, () -> payment("p1", 10, second).registerPayment());
         assertEquals(90, first.getBalance());
         assertEquals(100, second.getBalance());
     }
@@ -222,7 +255,9 @@ class BusinessValidationTest {
         CashRegister cashRegister = new CashRegister();
         new CashMovement("MOV-P1", MovementType.INCOME, 5, date, "Venta", PaymentMethod.CASH)
                 .registerMovement(cashRegister);
-        assertThrows(ValidationException.class, () -> payment("P1", 10, order).registerPayment(cashRegister));
+        assertThrows(
+                ValidationException.class,
+                () -> payment("P1", 10, order).registerPayment(cashRegister));
         assertEquals(100, order.getBalance());
         assertTrue(order.getPayments().isEmpty());
         assertEquals(5, cashRegister.calculateIncome());
@@ -231,11 +266,21 @@ class BusinessValidationTest {
     @Test
     void duplicateMovementDoesNotIncreaseCashTwice() {
         CashRegister cashRegister = new CashRegister();
-        CashMovement movement = new CashMovement("M1", MovementType.INCOME, 10, date, "Venta", PaymentMethod.CASH);
+        CashMovement movement =
+                new CashMovement("M1", MovementType.INCOME, 10, date, "Venta", PaymentMethod.CASH);
         movement.registerMovement(cashRegister);
         assertThrows(ValidationException.class, () -> movement.registerMovement(cashRegister));
-        assertThrows(ValidationException.class, () -> new CashMovement("m1", MovementType.INCOME,
-                20, date, "Venta", PaymentMethod.CASH).registerMovement(cashRegister));
+        assertThrows(
+                ValidationException.class,
+                () ->
+                        new CashMovement(
+                                        "m1",
+                                        MovementType.INCOME,
+                                        20,
+                                        date,
+                                        "Venta",
+                                        PaymentMethod.CASH)
+                                .registerMovement(cashRegister));
         assertEquals(10, cashRegister.calculateIncome());
         assertEquals(1, CashMovement.getAll().size());
     }
@@ -245,16 +290,23 @@ class BusinessValidationTest {
         CashRegister cashRegister = new CashRegister();
         assertThrows(ValidationException.class, () -> cashRegister.addIncome(-1));
         assertThrows(ValidationException.class, () -> cashRegister.addExpense(Double.NaN));
-        assertThrows(ValidationException.class, () -> cashRegister.setIncome(Double.POSITIVE_INFINITY));
+        assertThrows(
+                ValidationException.class, () -> cashRegister.setIncome(Double.POSITIVE_INFINITY));
         assertEquals(0, cashRegister.calculateBalance());
     }
 
     @Test
     void duplicateUserNameIdOrRoleIsRejected() {
         new User("U1", "ana", "secret", Role.EMPLOYEE).register();
-        assertThrows(ValidationException.class, () -> new User("u1", "luis", "secret", Role.CASHIER).register());
-        assertThrows(ValidationException.class, () -> new User("U2", "ANA", "secret", Role.CASHIER).register());
-        assertThrows(ValidationException.class, () -> new User("U3", "luis", "secret", Role.EMPLOYEE).register());
+        assertThrows(
+                ValidationException.class,
+                () -> new User("u1", "luis", "secret", Role.CASHIER).register());
+        assertThrows(
+                ValidationException.class,
+                () -> new User("U2", "ANA", "secret", Role.CASHIER).register());
+        assertThrows(
+                ValidationException.class,
+                () -> new User("U3", "luis", "secret", Role.EMPLOYEE).register());
         assertEquals(1, User.getAll().size());
     }
 
@@ -274,8 +326,11 @@ class BusinessValidationTest {
     @Test
     void customerMenuContinuesAfterBusinessValidationFailure() {
         new Customer("C1", "Ana", "099", "171", "Quito").register();
-        String output = capture(() -> Customer.showManagementMenu(
-                new Scanner("1\nC2\nLuis\n099\n171\nQuito\n3\n0\n")));
+        String output =
+                capture(
+                        () ->
+                                Customer.showManagementMenu(
+                                        new Scanner("1\nC2\nLuis\n099\n171\nQuito\n3\n0\n")));
         assertTrue(output.contains("Ya existe un cliente con esa cedula."));
         assertTrue(output.contains("LISTA DE CLIENTES"));
         assertEquals(1, Customer.getAll().size());
@@ -285,8 +340,13 @@ class BusinessValidationTest {
     void consoleReportsEmptyOrderWithoutSavingIt() {
         new Customer("C1", "Ana", "099", "171", "Quito").register();
         User employee = new User("U1", "ana", "secret", Role.EMPLOYEE);
-        String output = capture(() -> ConsoleInput.runAction(
-                () -> WorkOrder.registerFromConsole(new Scanner("C1\n0\n"), employee)));
+        String output =
+                capture(
+                        () ->
+                                ConsoleInput.runAction(
+                                        () ->
+                                                WorkOrder.registerFromConsole(
+                                                        new Scanner("C1\n0\n"), employee)));
         assertTrue(output.contains("La orden debe tener al menos un detalle."));
         assertFalse(output.contains("creada exitosamente"));
         assertTrue(WorkOrder.getAll().isEmpty());
@@ -294,17 +354,26 @@ class BusinessValidationTest {
 
     @Test
     void consoleCatchesPaymentExceptionWithoutShowingStackTrace() {
-        String output = capture(() -> ConsoleInput.runAction(
-                () -> payment("P1", -1, order("WO-1")).registerPayment()));
+        String output =
+                capture(
+                        () ->
+                                ConsoleInput.runAction(
+                                        () -> payment("P1", -1, order("WO-1")).registerPayment()));
         assertTrue(output.startsWith("Error: "));
         assertFalse(output.contains("Exception"));
     }
 
     @Test
     void consoleHidesTechnicalCauseOfPersistenceFailure() {
-        String output = capture(() -> ConsoleInput.runAction(() -> {
-            throw new PersistenceException("No se pudieron guardar los datos.", new IOException("Disk unavailable"));
-        }));
+        String output =
+                capture(
+                        () ->
+                                ConsoleInput.runAction(
+                                        () -> {
+                                            throw new PersistenceException(
+                                                    "No se pudieron guardar los datos.",
+                                                    new IOException("Disk unavailable"));
+                                        }));
         assertTrue(output.contains("Error: No se pudieron guardar los datos."));
         assertFalse(output.contains("Disk unavailable"));
         assertFalse(output.contains("Exception"));
@@ -313,7 +382,8 @@ class BusinessValidationTest {
     @Test
     void persistenceExceptionPreservesTechnicalCause() {
         IOException cause = new IOException("Disk unavailable");
-        PersistenceException exception = new PersistenceException("No se pudieron guardar los datos.", cause);
+        PersistenceException exception =
+                new PersistenceException("No se pudieron guardar los datos.", cause);
         assertSame(cause, exception.getCause());
         assertEquals("No se pudieron guardar los datos.", exception.getMessage());
     }

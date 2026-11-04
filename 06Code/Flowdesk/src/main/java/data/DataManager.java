@@ -15,26 +15,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager {
-    
-    private static final JsonSerializer<CatalogItem> itemSerializer = (src, typeOfSrc, context) -> {
-        JsonObject jsonObject = context.serialize(src).getAsJsonObject();
-        jsonObject.addProperty("type", src.getItemType());
-        return jsonObject;
-    };
 
-    private static final JsonDeserializer<CatalogItem> itemDeserializer = (json, typeOfT, context) -> {
-        JsonObject jsonObject = json.getAsJsonObject();
-        String type = jsonObject.get("type").getAsString();
-        if ("PRODUCTO".equals(type)) return context.deserialize(jsonObject, Product.class);
-        if ("SERVICIO".equals(type)) return context.deserialize(jsonObject, Service.class);
-        throw new JsonParseException("Tipo desconocido: " + type);
-    };
+    private static final JsonSerializer<CatalogItem> itemSerializer =
+            (src, typeOfSrc, context) -> {
+                JsonObject jsonObject = context.serialize(src).getAsJsonObject();
+                jsonObject.addProperty("type", src.getItemType());
+                return jsonObject;
+            };
 
-    private static final Gson gson = new GsonBuilder()
-            .setPrettyPrinting()
-            .registerTypeAdapter(CatalogItem.class, itemSerializer)
-            .registerTypeAdapter(CatalogItem.class, itemDeserializer)
-            .create();
+    private static final JsonDeserializer<CatalogItem> itemDeserializer =
+            (json, typeOfT, context) -> {
+                JsonObject jsonObject = json.getAsJsonObject();
+                String type = jsonObject.get("type").getAsString();
+                if ("PRODUCTO".equals(type)) return context.deserialize(jsonObject, Product.class);
+                if ("SERVICIO".equals(type)) return context.deserialize(jsonObject, Service.class);
+                throw new JsonParseException("Tipo desconocido: " + type);
+            };
+
+    private static final Gson gson =
+            new GsonBuilder()
+                    .setPrettyPrinting()
+                    .registerTypeAdapter(CatalogItem.class, itemSerializer)
+                    .registerTypeAdapter(CatalogItem.class, itemDeserializer)
+                    .create();
 
     public static Path getDataDirectory() {
         String configuredDirectory = System.getProperty("flowdesk.dataDirectory");
@@ -42,8 +45,13 @@ public class DataManager {
             return Path.of(configuredDirectory).toAbsolutePath().normalize();
         }
         try {
-            Path codeLocation = Path.of(DataManager.class.getProtectionDomain()
-                    .getCodeSource().getLocation().toURI());
+            Path codeLocation =
+                    Path.of(
+                            DataManager.class
+                                    .getProtectionDomain()
+                                    .getCodeSource()
+                                    .getLocation()
+                                    .toURI());
             Path projectDirectory = findProjectDirectory(codeLocation);
             if (projectDirectory != null) {
                 return projectDirectory.resolve("datos_flowdesk");
@@ -51,15 +59,18 @@ public class DataManager {
         } catch (URISyntaxException exception) {
             throw new PersistenceException("No se pudo localizar la carpeta de datos.", exception);
         }
-        Path workingDirectory = Path.of(System.getProperty("user.dir")).toAbsolutePath().normalize();
+        Path workingDirectory =
+                Path.of(System.getProperty("user.dir")).toAbsolutePath().normalize();
         Path projectDirectory = findProjectDirectory(workingDirectory);
-        return (projectDirectory == null ? workingDirectory : projectDirectory).resolve("datos_flowdesk");
+        return (projectDirectory == null ? workingDirectory : projectDirectory)
+                .resolve("datos_flowdesk");
     }
 
     private static Path findProjectDirectory(Path location) {
         Path current = Files.isDirectory(location) ? location : location.getParent();
         while (current != null) {
-            if (Files.isRegularFile(current.resolve("pom.xml")) && Files.isDirectory(current.resolve("src"))) {
+            if (Files.isRegularFile(current.resolve("pom.xml"))
+                    && Files.isDirectory(current.resolve("src"))) {
                 return current;
             }
             Path nestedProject = current.resolve("06Code/Flowdesk");
@@ -90,12 +101,17 @@ public class DataManager {
             }
             Path destination = directory.resolve("users.json");
             try {
-                Files.move(temporaryFile, destination, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+                Files.move(
+                        temporaryFile,
+                        destination,
+                        StandardCopyOption.ATOMIC_MOVE,
+                        StandardCopyOption.REPLACE_EXISTING);
             } catch (AtomicMoveNotSupportedException exception) {
                 Files.move(temporaryFile, destination, StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (IOException exception) {
-            throw new PersistenceException("No se pudieron guardar las cuentas. Intente nuevamente.", exception);
+            throw new PersistenceException(
+                    "No se pudieron guardar las cuentas. Intente nuevamente.", exception);
         } finally {
             if (temporaryFile != null) temporaryFile.toFile().delete();
         }
@@ -110,7 +126,7 @@ public class DataManager {
         }
         ArrayList<User> previousUsers = new ArrayList<>(User.getAll());
         try (Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8)) {
-            Type usersType = new TypeToken<ArrayList<User>>(){}.getType();
+            Type usersType = new TypeToken<ArrayList<User>>() {}.getType();
             ArrayList<User> loadedUsers = gson.fromJson(reader, usersType);
             if (loadedUsers == null || loadedUsers.contains(null)) {
                 throw new ValidationException("El archivo de cuentas no es valido.");
@@ -121,13 +137,17 @@ public class DataManager {
             }
         } catch (IOException | JsonParseException | ValidationException exception) {
             User.setAll(previousUsers);
-            throw new PersistenceException("No se pudieron cargar las cuentas. Revise el archivo de usuarios.", exception);
+            throw new PersistenceException(
+                    "No se pudieron cargar las cuentas. Revise el archivo de usuarios.", exception);
         }
     }
 
     public static <T> void saveList(List<T> items, String fileName) {
         init();
-        try (Writer writer = new FileWriter(getDataDirectory().resolve(fileName + ".json").toFile(), StandardCharsets.UTF_8)) {
+        try (Writer writer =
+                new FileWriter(
+                        getDataDirectory().resolve(fileName + ".json").toFile(),
+                        StandardCharsets.UTF_8)) {
             gson.toJson(items, writer);
         } catch (IOException e) {
             throw new PersistenceException("Error al guardar " + fileName + ".json", e);
@@ -142,7 +162,8 @@ public class DataManager {
             List<T> items = gson.fromJson(reader, listType);
             return items != null ? items : new ArrayList<>();
         } catch (IOException | JsonParseException e) {
-            throw new PersistenceException("Error crítico al cargar " + fileName + ".json. Evitando sobrescritura.", e);
+            throw new PersistenceException(
+                    "Error crítico al cargar " + fileName + ".json. Evitando sobrescritura.", e);
         }
     }
 
@@ -158,28 +179,31 @@ public class DataManager {
 
     public static void loadAll() {
         loadUsers();
-        Type customersType = new TypeToken<ArrayList<Customer>>(){}.getType();
+        Type customersType = new TypeToken<ArrayList<Customer>>() {}.getType();
         Customer.setAll(loadList("customers", customersType));
 
-        Type categoriesType = new TypeToken<ArrayList<Category>>(){}.getType();
+        Type categoriesType = new TypeToken<ArrayList<Category>>() {}.getType();
         Category.setAll(loadList("categories", categoriesType));
 
-        Type productsType = new TypeToken<ArrayList<Product>>(){}.getType();
+        Type productsType = new TypeToken<ArrayList<Product>>() {}.getType();
         Product.setAll(loadList("products", productsType));
 
-        Type servicesType = new TypeToken<ArrayList<Service>>(){}.getType();
+        Type servicesType = new TypeToken<ArrayList<Service>>() {}.getType();
         Service.setAll(loadList("services", servicesType));
 
-        Type ordersType = new TypeToken<ArrayList<WorkOrder>>(){}.getType();
+        Type ordersType = new TypeToken<ArrayList<WorkOrder>>() {}.getType();
         WorkOrder.setAll(loadList("orders", ordersType));
 
-        Type movementsType = new TypeToken<ArrayList<CashMovement>>(){}.getType();
+        Type movementsType = new TypeToken<ArrayList<CashMovement>>() {}.getType();
         CashMovement.setAll(loadList("movements", movementsType));
     }
 
     public static void saveCashRegister(CashRegister cashRegister) {
         init();
-        try (Writer writer = new FileWriter(getDataDirectory().resolve("cash_register.json").toFile(), StandardCharsets.UTF_8)) {
+        try (Writer writer =
+                new FileWriter(
+                        getDataDirectory().resolve("cash_register.json").toFile(),
+                        StandardCharsets.UTF_8)) {
             gson.toJson(cashRegister, writer);
         } catch (IOException e) {
             throw new PersistenceException("Error al guardar cash_register.json", e);
@@ -194,7 +218,8 @@ public class DataManager {
             CashRegister cashRegister = gson.fromJson(reader, CashRegister.class);
             return cashRegister != null ? cashRegister : new CashRegister();
         } catch (IOException | JsonParseException e) {
-            throw new PersistenceException("Error crítico al cargar cash_register.json. Evitando sobrescritura.", e);
+            throw new PersistenceException(
+                    "Error crítico al cargar cash_register.json. Evitando sobrescritura.", e);
         }
     }
 }

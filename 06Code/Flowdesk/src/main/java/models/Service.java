@@ -11,12 +11,15 @@ public class Service extends CatalogItem {
 
     private static List<Service> services = new ArrayList<>();
 
-    public Service(String serviceId, String name, String description, double price, Category category) {
+    public Service(
+            String serviceId, String name, String description, double price, Category category) {
         super(serviceId, name, description, price, category);
         validate();
     }
 
-    public Service() { super(); }
+    public Service() {
+        super();
+    }
 
     @Override
     public String getItemType() {
@@ -58,7 +61,8 @@ public class Service extends CatalogItem {
 
         System.out.println("Seleccione Categoria:");
         for (Category c : Category.getAll()) System.out.println(c.toString());
-        Category category = Category.search(ConsoleInput.readRequiredText(scanner, "ID Categoria: "));
+        Category category =
+                Category.search(ConsoleInput.readRequiredText(scanner, "ID Categoria: "));
 
         if (category != null) {
             Service s = new Service(id, name, description, price, category);
@@ -75,7 +79,15 @@ public class Service extends CatalogItem {
             System.out.println("No hay servicios registrados.");
         } else {
             for (Service s : services) {
-                System.out.println("- [" + s.getId() + "] " + s.getName() + " | Cat: " + s.getCategory().getName() + " | $" + s.getPrice());
+                System.out.println(
+                        "- ["
+                                + s.getId()
+                                + "] "
+                                + s.getName()
+                                + " | Cat: "
+                                + s.getCategory().getName()
+                                + " | $"
+                                + s.getPrice());
             }
         }
     }

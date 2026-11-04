@@ -11,12 +11,15 @@ public class Product extends CatalogItem {
 
     private static List<Product> products = new ArrayList<>();
 
-    public Product(String productId, String name, String description, double price, Category category) {
+    public Product(
+            String productId, String name, String description, double price, Category category) {
         super(productId, name, description, price, category);
         validate();
     }
 
-    public Product() { super(); }
+    public Product() {
+        super();
+    }
 
     @Override
     public String getItemType() {
@@ -58,7 +61,8 @@ public class Product extends CatalogItem {
 
         System.out.println("Seleccione Categoria:");
         for (Category c : Category.getAll()) System.out.println(c.toString());
-        Category category = Category.search(ConsoleInput.readRequiredText(scanner, "ID Categoria: "));
+        Category category =
+                Category.search(ConsoleInput.readRequiredText(scanner, "ID Categoria: "));
 
         if (category != null) {
             Product p = new Product(id, name, description, price, category);
@@ -75,9 +79,16 @@ public class Product extends CatalogItem {
             System.out.println("No hay productos registrados.");
         } else {
             for (Product p : products) {
-                System.out.println("- [" + p.getId() + "] " + p.getName() + " | Precio: $" + p.getPrice() + " | Cat: " + p.getCategory().getName());
+                System.out.println(
+                        "- ["
+                                + p.getId()
+                                + "] "
+                                + p.getName()
+                                + " | Precio: $"
+                                + p.getPrice()
+                                + " | Cat: "
+                                + p.getCategory().getName());
             }
         }
     }
-    
 }

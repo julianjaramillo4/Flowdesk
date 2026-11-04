@@ -9,7 +9,8 @@ public abstract class CatalogItem {
     protected double price;
     protected Category category;
 
-    public CatalogItem(String id, String name, String description, double price, Category category) {
+    public CatalogItem(
+            String id, String name, String description, double price, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -17,12 +18,10 @@ public abstract class CatalogItem {
         this.category = category;
     }
 
-    public CatalogItem() { }
+    public CatalogItem() {}
 
-    // Método polimórfico solicitado
     public abstract String getItemType();
 
-    // Lógica de validación común
     protected void validateCommon() {
         Validation.requireText(id, "identificador");
         Validation.requireText(name, "nombre");
@@ -32,17 +31,43 @@ public abstract class CatalogItem {
         category.validate();
     }
 
-    // Getters
-    public String getId() { return id; }
-    public String getName() { return name; }
-    public String getDescription() { return description; }
-    public double getPrice() { return price; }
-    public Category getCategory() { return category; }
+    public String getId() {
+        return id;
+    }
 
-    // Setters necesarios para Gson (si los usas)
-    public void setId(String id) { this.id = id; }
-    public void setName(String name) { this.name = name; }
-    public void setDescription(String description) { this.description = description; }
-    public void setPrice(double price) { this.price = price; }
-    public void setCategory(Category category) { this.category = category; }
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

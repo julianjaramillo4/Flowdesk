@@ -1,0 +1,26 @@
+-------------------------------------------------------------------------------
+Test set: com.mycompany.flowdesk.BusinessValidationTest
+-------------------------------------------------------------------------------
+Tests run: 25, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.148 s <<< FAILURE! -- in com.mycompany.flowdesk.BusinessValidationTest
+com.mycompany.flowdesk.BusinessValidationTest.changingRegisteredUserCannotIntroduceDuplicates -- Time elapsed: 0.010 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected exceptions.ValidationException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.mycompany.flowdesk.BusinessValidationTest.changingRegisteredUserCannotIntroduceDuplicates(BusinessValidationTest.java:266)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.mycompany.flowdesk.BusinessValidationTest.duplicateUserNameIdOrRoleIsRejected -- Time elapsed: 0.013 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected exceptions.ValidationException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.mycompany.flowdesk.BusinessValidationTest.duplicateUserNameIdOrRoleIsRejected(BusinessValidationTest.java:255)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

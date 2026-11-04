@@ -21,7 +21,7 @@ public class Category {
         validate();
     }
 
-    public Category() { }
+    public Category() {}
 
     public static void setAll(List<Category> newItems) {
         categories = newItems;
@@ -64,9 +64,17 @@ public class Category {
         System.out.println("Categoria creada exitosamente.");
     }
 
-    public String getCategoryId() { return categoryId; }
-    public String getName() { return name; }
-    public String getDescription() { return description; }
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 
     @Override
     public String toString() {

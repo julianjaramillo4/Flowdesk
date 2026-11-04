@@ -1,7 +1,8 @@
 package enums;
 
 public enum PaymentMethod {
-    CASH, TRANSFER;
+    CASH,
+    TRANSFER;
 
     @Override
     public String toString() {
