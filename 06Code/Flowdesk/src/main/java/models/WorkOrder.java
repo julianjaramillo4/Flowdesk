@@ -130,6 +130,49 @@ public class WorkOrder {
         this.status = newStatus;
     }
 
+    public int calculateProgressPercentage() {
+        if (details == null || details.isEmpty()) {
+            return 0;
+        }
+        int completedCount = 0;
+        for (OrderDetail detail : details) {
+            if (detail != null && detail.isCompleted()) {
+                completedCount++;
+            }
+        }
+        return (int) Math.round((completedCount * 100.0) / details.size());
+    }
+
+    public int getCompletedDetailCount() {
+        if (details == null) return 0;
+        int count = 0;
+        for (OrderDetail detail : details) {
+            if (detail != null && detail.isCompleted()) count++;
+        }
+        return count;
+    }
+
+    public int getTotalDetailCount() {
+        return details == null ? 0 : details.size();
+    }
+
+    public String getProgressBar() {
+        int percent = calculateProgressPercentage();
+        int filled = percent / 10;
+        StringBuilder bar = new StringBuilder("[");
+        for (int i = 0; i < 10; i++) {
+            bar.append(i < filled ? '#' : '-');
+        }
+        bar.append("] ")
+                .append(percent)
+                .append("% (")
+                .append(getCompletedDetailCount())
+                .append("/")
+                .append(getTotalDetailCount())
+                .append(")");
+        return bar.toString();
+    }
+
     public static void registerFromConsole(Scanner scanner, User employee) {
         System.out.println("\n--- CREAR NUEVA ORDEN DE TRABAJO ---");
         String newId = String.format("WO-%03d", orderCounter++);
@@ -246,6 +289,8 @@ public class WorkOrder {
                                 + customerName
                                 + " | Estado: "
                                 + wo.status
+                                + " | Progreso: "
+                                + wo.getProgressBar()
                                 + " | Total: $"
                                 + wo.total
                                 + " | Saldo: $"
@@ -255,30 +300,104 @@ public class WorkOrder {
     }
 
     public static void updateStatusFromConsole(Scanner scanner) {
-        System.out.println("\n--- ACTUALIZAR ESTADO DE ORDEN ---");
+        System.out.println("\n--- ACTUALIZAR ORDEN ---");
         if (orders.isEmpty()) {
             System.out.println("No hay ordenes registradas para actualizar.");
             return;
         }
 
         String searchId =
-                ConsoleInput.readRequiredText(scanner, "Ingrese el numero de orden (ej. WO-001): ");
-        WorkOrder matchingOrder = null;
-
+                ConsoleInput.readRequiredText(
+                        scanner, "Ingrese el numero de orden (ej. WO-001): ");
+        WorkOrder order = null;
         for (WorkOrder wo : orders) {
             if (Validation.sameIdentifier(wo.getOrderId(), searchId)) {
-                matchingOrder = wo;
+                order = wo;
                 break;
             }
         }
 
-        if (matchingOrder == null) {
+        if (order == null) {
             System.out.println("Error: Orden no encontrada.");
             return;
         }
 
-        System.out.println("Orden encontrada: " + matchingOrder.getOrderId());
-        System.out.println("Estado actual: " + matchingOrder.getStatus());
+        boolean back = false;
+        while (!back) {
+            System.out.println(
+                    "\nOrden: "
+                            + order.getOrderId()
+                            + " | Estado: "
+                            + order.getStatus()
+                            + " | Progreso: "
+                            + order.getProgressBar());
+
+            System.out.println("\n1. Ver y marcar detalles");
+            System.out.println("2. Cambiar estado");
+            System.out.println("0. Volver");
+            int option = ConsoleInput.readOption(scanner, "Opcion: ", 0, 2);
+
+            switch (option) {
+                case 1 -> toggleDetails(scanner, order);
+                case 2 -> changeStatusInteractive(scanner, order);
+                case 0 -> back = true;
+            }
+        }
+    }
+
+    private static void toggleDetails(Scanner scanner, WorkOrder order) {
+        if (order.details == null || order.details.isEmpty()) {
+            System.out.println("La orden no tiene detalles.");
+            return;
+        }
+        System.out.println("\n--- DETALLES ---");
+        for (int i = 0; i < order.details.size(); i++) {
+            OrderDetail d = order.details.get(i);
+            System.out.println(
+                    (i + 1)
+                            + ". "
+                            + (d.isCompleted() ? "[X] " : "[ ] ")
+                            + d.getItemName()
+                            + " (x"
+                            + d.getQuantity()
+                            + ")");
+        }
+        System.out.println("0. Volver");
+        int pick =
+                ConsoleInput.readOption(
+                        scanner, "Seleccione detalle a alternar: ", 0, order.details.size());
+        if (pick == 0) return;
+
+        OrderDetail selected = order.details.get(pick - 1);
+        selected.setCompleted(!selected.isCompleted());
+        System.out.println(
+                "Detalle '"
+                        + selected.getItemName()
+                        + "' marcado como "
+                        + (selected.isCompleted() ? "COMPLETADO" : "PENDIENTE")
+                        + ".");
+        System.out.println("Progreso actual: " + order.getProgressBar());
+
+        syncStatusWithProgress(order);
+    }
+
+    private static void syncStatusWithProgress(WorkOrder order) {
+        int p = order.calculateProgressPercentage();
+        OrderStatus current = order.getStatus();
+        if (p == 0 && current == OrderStatus.WAITING) return;
+        if (p == 100 && current != OrderStatus.DELIVERED) {
+            order.changeStatus(OrderStatus.COMPLETED);
+            System.out.println("-> Estado ajustado automaticamente a: " + OrderStatus.COMPLETED);
+        } else if (p > 0
+                && p < 100
+                && current != OrderStatus.DELIVERED
+                && current != OrderStatus.IN_PROGRESS) {
+            order.changeStatus(OrderStatus.IN_PROGRESS);
+            System.out.println("-> Estado ajustado automaticamente a: " + OrderStatus.IN_PROGRESS);
+        }
+    }
+
+    private static void changeStatusInteractive(Scanner scanner, WorkOrder order) {
         System.out.println("\nSeleccione el nuevo estado:");
         System.out.println("1. En espera");
         System.out.println("2. Aprobada");
@@ -298,15 +417,11 @@ public class WorkOrder {
                     case 5 -> OrderStatus.DELIVERED;
                     default -> null;
                 };
+        if (newStatus == null) return;
 
-        if (newStatus == null) {
-            System.out.println("Opcion no valida.");
-            return;
-        }
-
-        matchingOrder.changeStatus(newStatus);
-        System.out.println(
-                "¡Estado actualizado exitosamente a: " + matchingOrder.getStatus() + "!");
+        order.changeStatus(newStatus);
+        System.out.println("¡Estado actualizado a: " + order.getStatus() + "!");
+        System.out.println("Progreso calculado: " + order.getProgressBar());
     }
 
     public String getOrderId() {

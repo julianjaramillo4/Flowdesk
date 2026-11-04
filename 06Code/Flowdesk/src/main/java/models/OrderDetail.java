@@ -8,6 +8,7 @@ public class OrderDetail {
     private int quantity;
     private String description;
     private double unitPrice;
+    private boolean completed;
 
     private transient CatalogItem catalogItem;
 
@@ -18,6 +19,7 @@ public class OrderDetail {
         this.quantity = quantity;
         this.description = description;
         this.unitPrice = unitPrice;
+        this.completed = false;
         validate();
     }
 
@@ -54,6 +56,14 @@ public class OrderDetail {
 
     public double getUnitPrice() {
         return unitPrice;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public CatalogItem getCatalogItem() {

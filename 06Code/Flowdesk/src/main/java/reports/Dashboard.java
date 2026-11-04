@@ -55,7 +55,9 @@ public class Dashboard {
                             + "] Cliente: "
                             + customerName
                             + " | Estado: "
-                            + o.getStatus());
+                            + o.getStatus()
+                            + " | "
+                            + o.getProgressBar());
         }
 
         System.out.println("=============================================\n");

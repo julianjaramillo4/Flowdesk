@@ -22,5 +22,35 @@
     "username": "U_EMPLOYEE",
     "password": "joquin loza",
     "role": "EMPLOYEE"
+  },
+  {
+    "userId": "U_EMPLOYEE_1793735007323",
+    "username": "fdsa",
+    "password": "dsd",
+    "role": "EMPLOYEE"
+  },
+  {
+    "userId": "U_MANAGER_1793736033963",
+    "username": "1",
+    "password": "1",
+    "role": "MANAGER"
+  },
+  {
+    "userId": "U_EMPLOYEE_1793736256991",
+    "username": "dsadsadsad",
+    "password": "dsadsad",
+    "role": "EMPLOYEE"
+  },
+  {
+    "userId": "U_CASHIER_1793736452342",
+    "username": "sdsadsadsa",
+    "password": "fghfhg",
+    "role": "CASHIER"
+  },
+  {
+    "userId": "U_EMPLOYEE_1793752300684",
+    "username": "45",
+    "password": "45",
+    "role": "EMPLOYEE"
   }
 ]

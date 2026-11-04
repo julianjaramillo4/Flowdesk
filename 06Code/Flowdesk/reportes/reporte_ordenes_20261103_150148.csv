@@ -1,0 +1,5 @@
+ID,Fecha,Cliente,Estado,Total,Pagado,Saldo
+ORD-1,03/11/2026 15:01,Papeleria Aurora (Demo),IN_PROGRESS,35,00,10,00,25,00
+ORD-2,03/11/2026 15:01,Cafeteria El Mirador (Demo),WAITING,30,00,0,00,30,00
+ORD-3,03/11/2026 15:01,Club Universitario (Demo),COMPLETED,9,00,0,00,9,00
+ORD-4,03/11/2026 15:01,Papeleria Aurora (Demo),WAITING,35,00,0,00,35,00
