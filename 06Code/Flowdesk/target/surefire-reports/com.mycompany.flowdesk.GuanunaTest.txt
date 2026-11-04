@@ -1,4 +1,136 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.flowdesk.GuanunaTest
 -------------------------------------------------------------------------------
-Tests run: 30, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.053 s -- in com.mycompany.flowdesk.GuanunaTest
+Tests run: 30, Failures: 0, Errors: 12, Skipped: 0, Time elapsed: 0.344 s <<< FAILURE! -- in com.mycompany.flowdesk.GuanunaTest
+com.mycompany.flowdesk.GuanunaTest.testRegisterOneCustomer -- Time elapsed: 0.002 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.GuanunaTest.testRegisterOneCustomer(GuanunaTest.java:44)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testCustomerContactFields -- Time elapsed: 0.002 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.GuanunaTest.testCustomerContactFields(GuanunaTest.java:112)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testSearchCustomerByNationalId -- Time elapsed: 0.002 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.GuanunaTest.testSearchCustomerByNationalId(GuanunaTest.java:71)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testCashMovementConsolePrintsConfirmation -- Time elapsed: 0.047 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
+	at utils.ConsoleInput.readLine(ConsoleInput.java:13)
+	at utils.ConsoleInput.readInt(ConsoleInput.java:43)
+	at utils.ConsoleInput.readOption(ConsoleInput.java:52)
+	at models.CashMovement.registerFromConsole(CashMovement.java:91)
+	at com.mycompany.flowdesk.GuanunaTest.lambda$testCashMovementConsolePrintsConfirmation$0(GuanunaTest.java:217)
+	at com.mycompany.flowdesk.GuanunaTest.capture(GuanunaTest.java:30)
+	at com.mycompany.flowdesk.GuanunaTest.testCashMovementConsolePrintsConfirmation(GuanunaTest.java:217)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testSearchCustomerById -- Time elapsed: 0.002 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.GuanunaTest.testSearchCustomerById(GuanunaTest.java:62)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testCustomerConsoleRejectsDuplicateId -- Time elapsed: 0.002 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.GuanunaTest.testCustomerConsoleRejectsDuplicateId(GuanunaTest.java:120)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testCashMovementConsoleExpense -- Time elapsed: 0.004 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
+	at utils.ConsoleInput.readLine(ConsoleInput.java:13)
+	at utils.ConsoleInput.readInt(ConsoleInput.java:43)
+	at utils.ConsoleInput.readOption(ConsoleInput.java:52)
+	at models.CashMovement.registerFromConsole(CashMovement.java:91)
+	at com.mycompany.flowdesk.GuanunaTest.lambda$testCashMovementConsoleExpense$0(GuanunaTest.java:207)
+	at com.mycompany.flowdesk.GuanunaTest.capture(GuanunaTest.java:30)
+	at com.mycompany.flowdesk.GuanunaTest.testCashMovementConsoleExpense(GuanunaTest.java:207)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testCashMovementConsoleIncome -- Time elapsed: 0.014 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
+	at utils.ConsoleInput.readLine(ConsoleInput.java:13)
+	at utils.ConsoleInput.readInt(ConsoleInput.java:43)
+	at utils.ConsoleInput.readOption(ConsoleInput.java:52)
+	at models.CashMovement.registerFromConsole(CashMovement.java:91)
+	at com.mycompany.flowdesk.GuanunaTest.lambda$testCashMovementConsoleIncome$0(GuanunaTest.java:197)
+	at com.mycompany.flowdesk.GuanunaTest.capture(GuanunaTest.java:30)
+	at com.mycompany.flowdesk.GuanunaTest.testCashMovementConsoleIncome(GuanunaTest.java:197)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testSearchUnknownCustomer -- Time elapsed: 0.002 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.GuanunaTest.testSearchUnknownCustomer(GuanunaTest.java:89)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testRegisterMultipleCustomers -- Time elapsed: 0.005 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.GuanunaTest.testRegisterMultipleCustomers(GuanunaTest.java:53)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testSearchCustomerIdIgnoringCase -- Time elapsed: 0.002 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.GuanunaTest.testSearchCustomerIdIgnoringCase(GuanunaTest.java:80)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+com.mycompany.flowdesk.GuanunaTest.testCustomerNameField -- Time elapsed: 0.005 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.GuanunaTest.testCustomerNameField(GuanunaTest.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+

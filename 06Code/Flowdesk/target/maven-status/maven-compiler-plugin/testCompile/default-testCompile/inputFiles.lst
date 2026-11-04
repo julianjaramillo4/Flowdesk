@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\AccountPersistenceTest.java
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\BusinessValidationTest.java
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\ConsoleInputTest.java
@@ -8,17 +7,5 @@ C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\test\java\com\myco
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\JaramilloTest.java
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\LanchimbaTest.java
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\PaymentConsoleTest.java
+C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\ReportCsvTest.java
 C:\Users\JULIAN\TEAM-4-PROJECT-REPOSITORY\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\RequiredFieldsValidationTest.java
-=======
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\AccountPersistenceTest.java
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\BusinessValidationTest.java
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\ConsoleInputTest.java
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\DataManagerTest.java
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\DisplayLanguageTest.java
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\GuanunaTest.java
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\JaramilloTest.java
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\LanchimbaTest.java
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\PaymentConsoleTest.java
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\ReportCsvTest.java
-C:\Users\CRIS\Dev\universidad\oop\TEAM-4-PROJECT-CLEAN\06Code\Flowdesk\src\test\java\com\mycompany\flowdesk\RequiredFieldsValidationTest.java
->>>>>>> 6eafda688a8232aa3874123faeb60417b132a3b0

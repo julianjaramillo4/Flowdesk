@@ -1,6 +1,7 @@
 package utils;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Date {
     private int day;
@@ -18,6 +19,13 @@ public class Date {
     public static Date now() {
         LocalDate today = LocalDate.now();
         return new Date(today.getDayOfMonth(), today.getMonthValue(), today.getYear());
+    }
+
+    public long daysTo(Date other) {
+        if (other == null) return Long.MAX_VALUE;
+        LocalDate d1 = LocalDate.of(this.year, this.month, this.day);
+        LocalDate d2 = LocalDate.of(other.year, other.month, other.day);
+        return ChronoUnit.DAYS.between(d1, d2);
     }
 
     public int getDay() {

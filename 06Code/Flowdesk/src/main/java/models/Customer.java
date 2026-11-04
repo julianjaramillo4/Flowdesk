@@ -231,4 +231,7 @@ public class Customer {
     public String getIdNumber() { return idNumber; }
     public String getAddress() { return address; }
     public String getBirthDate() { return birthDate; }
+    public Customer(String arg1, String arg2, String arg3, String arg4, String arg5) {
+    this(arg1, arg2, arg3, arg4, arg5, "");
+}
 }

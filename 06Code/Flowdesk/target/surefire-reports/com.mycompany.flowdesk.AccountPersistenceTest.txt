@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.flowdesk.AccountPersistenceTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.346 s -- in com.mycompany.flowdesk.AccountPersistenceTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.130 s -- in com.mycompany.flowdesk.AccountPersistenceTest

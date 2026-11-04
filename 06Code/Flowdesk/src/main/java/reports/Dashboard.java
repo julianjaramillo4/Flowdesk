@@ -69,4 +69,7 @@ public class Dashboard {
         sb.append("==========================================");
         return sb.toString();
     }
+    public void showDashboard() {
+        System.out.println(this.toString());
+    }
 }

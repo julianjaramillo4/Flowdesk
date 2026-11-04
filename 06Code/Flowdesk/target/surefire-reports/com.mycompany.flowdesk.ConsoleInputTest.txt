@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.flowdesk.ConsoleInputTest
 -------------------------------------------------------------------------------
-Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s -- in com.mycompany.flowdesk.ConsoleInputTest
+Tests run: 13, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.189 s <<< FAILURE! -- in com.mycompany.flowdesk.ConsoleInputTest
+com.mycompany.flowdesk.ConsoleInputTest.orderCreationRetriesInvalidQuantityAndMenuOption -- Time elapsed: 0.005 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.ConsoleInputTest.orderCreationRetriesInvalidQuantityAndMenuOption(ConsoleInputTest.java:115)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+

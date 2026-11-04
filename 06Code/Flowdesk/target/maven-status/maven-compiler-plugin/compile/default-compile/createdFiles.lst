@@ -10,6 +10,7 @@ enums\Role.class
 models\Category.class
 com\mycompany\flowdesk\Flowdesk$1.class
 models\Payment.class
+reports\ReportGenerator$1.class
 reports\Report.class
 data\DataManager$5.class
 models\Service.class

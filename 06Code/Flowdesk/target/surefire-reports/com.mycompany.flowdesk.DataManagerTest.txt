@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.flowdesk.DataManagerTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.140 s -- in com.mycompany.flowdesk.DataManagerTest
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.283 s <<< FAILURE! -- in com.mycompany.flowdesk.DataManagerTest
+com.mycompany.flowdesk.DataManagerTest.testSaveAndLoadOrdersWithPayments -- Time elapsed: 0.007 s <<< ERROR!
+exceptions.ValidationException: El telefono debe tener entre 10 y 12 digitos numericos.
+	at models.Customer.validate(Customer.java:56)
+	at models.Customer.<init>(Customer.java:33)
+	at models.Customer.<init>(Customer.java:235)
+	at com.mycompany.flowdesk.DataManagerTest.testSaveAndLoadOrdersWithPayments(DataManagerTest.java:70)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
